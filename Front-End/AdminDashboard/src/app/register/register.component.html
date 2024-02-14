@@ -1,32 +1,85 @@
 <div class="home p-5 container d-flex flex-column align-items-center">
   <div><h2>Register</h2></div>
   <div>
-    <form action="">
+    <form [formGroup]="registerValidation" action="">
       <div class="d-flex flex-column">
         <div class="d-flex flex-column-reverse">
-          <input class="inputWidthLong" type="text" id="name" />
-          <label for="name">Name</label>
+          <input
+            formControlName="name"
+            [value]="inputName"
+            class="inputWidthLong"
+            type="text"
+            id="name"
+          />
+          <label id="name" for="name">Name</label>
         </div>
         <div class="d-flex m-2 justify-content-end">
-          <span> valid name address</span>
+          <!-- <div style="visibility: hidden"><span> valid name address</span></div> -->
+
+          @if (nameValid.errors?.["required"]&&nameValid.touched) {
+          <div>
+            <p class="text-danger">Name Required</p>
+          </div>
+          }
+          <!-- @if (!nameValid.errors?.["pattern"]) {
+          <div>
+            <p class="text-danger">Name must be text</p>
+          </div>
+          }  -->
+          @if (nameValid.errors?.['minlength']) {
+          <div>
+            <p class="text-danger">Name lentgh must be greater than 5</p>
+          </div>
+          }
         </div>
       </div>
       <div class="d-flex flex-column">
         <div class="d-flex flex-column-reverse">
-          <input class="inputWidthLong" type="email" id="Email" />
+          <input
+            formControlName="email"
+            class="inputWidthLong"
+            type="email"
+            id="Email"
+            title="error"
+          />
           <label for="Email">Email</label>
         </div>
         <div class="d-flex m-2 justify-content-end">
-          <span> valid Email address</span>
+          <!-- <span> valid Email address</span> -->
+          @if (emailValid.errors?.["required"]&&emailValid.touched) {
+          <div>
+            <p class="text-danger">Email Required</p>
+          </div>
+          } @if (emailValid.errors?.["pattern"]&&emailValid.touched) {
+          <div>
+            <p class="text-danger">
+              invaild Email pattern enter example aaaa.aaaa&#64;aaaa
+            </p>
+          </div>
+          }
         </div>
       </div>
       <div class="d-flex flex-column">
         <div class="d-flex flex-column-reverse">
-          <input class="inputWidthLong" type="text" id="PhoneNumber" />
+          <input
+            formControlName="phone"
+            class="inputWidthLong"
+            type="text"
+            id="PhoneNumber"
+          />
           <label for="PhoneNumber">Phone Number</label>
         </div>
         <div class="d-flex m-2 justify-content-end">
-          <span> valid Phone Numberaddress</span>
+          <!-- <span> valid Phone Number</span> -->
+          @if (phoneValid.errors?.["required"]&&phoneValid.touched) {
+          <div>
+            <p class="text-danger">phone Required</p>
+          </div>
+          } @if (phoneValid.errors?.["pattern"]&&phoneValid.touched) {
+          <div>
+            <p class="text-danger">invaild phone pattern</p>
+          </div>
+          }
         </div>
       </div>
       <div class="d-flex flex-column">
@@ -35,7 +88,16 @@
           <label for="Password">Password</label>
         </div>
         <div class="d-flex m-2 justify-content-end">
-          <span> valid Password address</span>
+          <span> valid Password </span>
+        </div>
+      </div>
+      <div class="d-flex flex-column">
+        <div class="d-flex flex-column-reverse">
+          <input class="inputWidthLong" type="password" id="Password" />
+          <label for="Password">Current Password</label>
+        </div>
+        <div class="d-flex m-2 justify-content-end">
+          <span> valid Password </span>
         </div>
       </div>
 
@@ -113,9 +175,13 @@
         </div>
       </div>
       <div class="d-flex my-5 justify-content-center">
-        <div class="d-flex justify-content-center align-items-center bgc w-25">
-          Sign UP
-        </div>
+        <input
+          (click)="submit()"
+          class="d-flex justify-content-center align-items-center bgc w-25"
+          type="submit"
+          value=" Sign UP"
+          style="border: none"
+        />
       </div>
     </form>
   </div>

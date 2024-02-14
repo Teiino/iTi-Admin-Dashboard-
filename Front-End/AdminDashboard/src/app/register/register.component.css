@@ -54,3 +54,6 @@ input:focus + label,
 select:focus + label {
   color: white;
 }
+#name {
+  /* color: red; */
+}
