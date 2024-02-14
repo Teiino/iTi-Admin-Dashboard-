@@ -1,0 +1,56 @@
+.home,
+select {
+  background-color: #0f2027;
+  color: #8c8c8c;
+}
+h2 {
+  color: white;
+}
+input,
+select {
+  background-color: #2c5364;
+  outline: 2px solid #8c8c8c;
+  border: none;
+}
+.inputWidthLong {
+  /* width: 23rem; */
+  height: 2.6rem;
+}
+.inputWidthShort {
+  width: 6.4rem;
+  margin-right: 1.4rem;
+  height: 2.6rem;
+}
+input[type="radio"] {
+  display: none;
+}
+.bgc {
+  background-color: #2c5364;
+  height: 3rem;
+  color: #ffffff;
+  border-radius: 10% 20%;
+  -webkit-border-radius: 10% 20%;
+  -moz-border-radius: 10% 20%;
+  -ms-border-radius: 10% 20%;
+  -o-border-radius: 10% 20%;
+}
+.bgc:hover {
+  color: #2c5364;
+  background-color: #c8d6dc;
+}
+span {
+  /* visibility: hidden; */
+}
+.www {
+  width: 30%;
+}
+
+input:focus,
+select:focus {
+  outline: 2px solid white;
+}
+
+input:focus + label,
+select:focus + label {
+  color: white;
+}

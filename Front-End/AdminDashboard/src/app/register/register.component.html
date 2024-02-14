@@ -1,6 +1,122 @@
-<div class="container">
+<div class="home p-5 container d-flex flex-column align-items-center">
   <div><h2>Register</h2></div>
   <div>
-    <form action=""></form>
+    <form action="">
+      <div class="d-flex flex-column">
+        <div class="d-flex flex-column-reverse">
+          <input class="inputWidthLong" type="text" id="name" />
+          <label for="name">Name</label>
+        </div>
+        <div class="d-flex m-2 justify-content-end">
+          <span> valid name address</span>
+        </div>
+      </div>
+      <div class="d-flex flex-column">
+        <div class="d-flex flex-column-reverse">
+          <input class="inputWidthLong" type="email" id="Email" />
+          <label for="Email">Email</label>
+        </div>
+        <div class="d-flex m-2 justify-content-end">
+          <span> valid Email address</span>
+        </div>
+      </div>
+      <div class="d-flex flex-column">
+        <div class="d-flex flex-column-reverse">
+          <input class="inputWidthLong" type="text" id="PhoneNumber" />
+          <label for="PhoneNumber">Phone Number</label>
+        </div>
+        <div class="d-flex m-2 justify-content-end">
+          <span> valid Phone Numberaddress</span>
+        </div>
+      </div>
+      <div class="d-flex flex-column">
+        <div class="d-flex flex-column-reverse">
+          <input class="inputWidthLong" type="password" id="Password" />
+          <label for="Password">Password</label>
+        </div>
+        <div class="d-flex m-2 justify-content-end">
+          <span> valid Password address</span>
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-center align-items-end">
+        <div class="d-flex flex-column-reverse">
+          <input class="inputWidthShort" id="contry" type="text" />
+          <label for="contry">Country</label>
+        </div>
+        <div class="d-flex mx-5 flex-column-reverse">
+          <input class="inputWidthShort" id="City" type="text" />
+          <label for="City">City</label>
+        </div>
+        <div class="d-flex flex-column-reverse">
+          <input class="inputWidthShort" id="Street" type="text" />
+          <label for="Street">Street</label>
+        </div>
+      </div>
+      <div class="d-flex">
+        <div class="d-flex flex-column-reverse">
+          <select class="inputWidthShort" id="days">
+            <option *ngFor="let day of days" [value]="day">
+              {{ day }}
+            </option></select
+          ><label for="Year">Year</label>
+        </div>
+        <div class="d-flex flex-column-reverse mx-5">
+          <select id="months" class="inputWidthShort" name="months">
+            <option value="January">January</option>
+            <option value="February">February</option>
+            <option value="March">March</option>
+            <option value="April">April</option>
+            <option value="May">May</option>
+            <option value="June">June</option>
+            <option value="July">July</option>
+            <option value="August">August</option>
+            <option value="September">September</option>
+            <option value="October">October</option>
+            <option value="November">November</option>
+            <option value="December">December</option>
+          </select>
+          <label for="months">Month:</label>
+        </div>
+        <div class="d-flex flex-column-reverse">
+          <select class="inputWidthShort" id="years">
+            <option *ngFor="let year of years" [value]="year">
+              {{ year }}
+            </option></select
+          ><label for="Year">Year</label>
+        </div>
+      </div>
+      <div class="d-flex my-2">
+        <div class="d-flex flex-column">
+          <div
+            class="inputWidthShort d-flex justify-content-center align-items-center"
+            style="height: 3rem; font-size: larger"
+          >
+            <label>GENDER</label>
+          </div>
+        </div>
+        <div class="d-flex flex-column">
+          <div
+            class="inputWidthShort bgc d-flex justify-content-center align-items-center mx-5"
+          >
+            <input type="radio" name="male" id="male" />
+            <label for="male">Male</label>
+          </div>
+        </div>
+        <div class="d-flex flex-column">
+          <div
+            class="inputWidthShort bgc d-flex justify-content-center align-items-center"
+          >
+            <input type="radio" name="female" id="female" />
+            <label for="female">Female</label>
+          </div>
+        </div>
+      </div>
+      <div class="d-flex my-5 justify-content-center">
+        <div class="d-flex justify-content-center align-items-center bgc w-25">
+          Sign UP
+        </div>
+      </div>
+    </form>
   </div>
 </div>
