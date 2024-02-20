@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   AbstractControl,
   FormControl,
@@ -8,11 +8,14 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { UsersService } from '../services/users.service';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, FormsModule],
+  imports: [ReactiveFormsModule, CommonModule, FormsModule,HttpClientModule],
+  providers: [UsersService],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css',
 })
@@ -64,7 +67,7 @@ export class RegisterComponent {
     },
     { validators: this.passwordMatchValidator }
   );
-  constructor() {}
+  constructor(private UService: UsersService) {}
   Password: any;
 
   ngOnInit(): void {
@@ -112,9 +115,14 @@ export class RegisterComponent {
 
     return null;
   }
+  
   submit() {
     if (this.registerValidation.valid) {
-      console.log(this.registerValidation);
+    
+      addNew(this.registerValidation.valid){
+        this.UService.addNewStudent(this.registerValidation.value).subscribe()
+      }
+      console.log(this.registerValidation.value);
       alert('sucsess');
     } else {
       // console.log(this.registerValidation);
@@ -124,3 +132,5 @@ export class RegisterComponent {
     }
   }
 }
+
+

@@ -12,7 +12,19 @@ import { HttpClientModule } from '@angular/common/http';
 })
 export class UserComponent implements OnInit {
   constructor(private UService: UsersService) {}
+  users: any;
+
   ngOnInit() {
-    console.log(this.UService.GetAllUsers());
+    console.log('ass');
+
+    console.log(this.UService.GetAllUsers().subscribe());
+    this.UService.getStats().subscribe({
+      next: (data) => {
+        console.log(data);
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
   }
 }
