@@ -90,3 +90,7 @@ input.ng-invalid.ng-touched + span + label,
 select.ng-invalid.ng-touched + span + label {
   color: red;
 }
+input.ng-invalid.ng-touched + label,
+select.ng-invalid.ng-touched + label {
+  color: red;
+}

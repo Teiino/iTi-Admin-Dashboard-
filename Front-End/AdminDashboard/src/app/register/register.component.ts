@@ -118,7 +118,7 @@ export class RegisterComponent {
       alert('sucsess');
     } else {
       // console.log(this.registerValidation);
-      console.log(this.registerValidation.controls['gender']);
+      // console.log(this.registerValidation.controls['gender']);
 
       alert('invaild data');
     }
