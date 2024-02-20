@@ -9,12 +9,12 @@ import {
   Validators,
 } from '@angular/forms';
 import { UsersService } from '../services/users.service';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, FormsModule,HttpClientModule],
+  imports: [ReactiveFormsModule, CommonModule, FormsModule, HttpClientModule],
   providers: [UsersService],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css',
@@ -84,6 +84,7 @@ export class RegisterComponent {
   }
   get nameValid() {
     //true || false
+
     return this.registerValidation.controls['name'];
   }
   get emailValid() {
@@ -115,16 +116,49 @@ export class RegisterComponent {
 
     return null;
   }
-  
+  userObj: any;
+  newDate: any;
+  newDateFormat: any;
   submit() {
+    console.log(this.inputName);
+
     if (this.registerValidation.valid) {
-    
-      addNew(this.registerValidation.valid){
-        this.UService.addNewStudent(this.registerValidation.value).subscribe()
-      }
+      this.newDate = new Date(
+        `${this.registerValidation.value.year}-${this.registerValidation.value.month}-${this.registerValidation.value.day}`
+      );
+
+      const year = this.newDate.getFullYear();
+      const month = String(this.newDate.getMonth() + 1).padStart(2, '0');
+      const day = String(this.newDate.getDate()).padStart(2, '0');
+      this.newDateFormat = `${year}-${month}-${day}`;
+      console.log(this.newDateFormat);
+
+      this.userObj = {
+        name: this.registerValidation.value.name,
+        email: this.registerValidation.value.email,
+        password: this.registerValidation.value.Password,
+        gender: this.registerValidation.value.gender,
+        dateOfBirth: this.newDateFormat,
+        phonenumber: this.registerValidation.value.phone,
+        address: {
+          street: this.registerValidation.value.street,
+          city: this.registerValidation.value.city,
+          country: this.registerValidation.value.country,
+        },
+      };
+
+      console.log(this.userObj);
+
+      this.UService.addNewStudent(this.userObj).subscribe({
+        complete: () => {
+          alert('Added Successfully');
+        },
+      });
+
       console.log(this.registerValidation.value);
       alert('sucsess');
     } else {
+      console.log(this.registerValidation.value.name);
       // console.log(this.registerValidation);
       // console.log(this.registerValidation.controls['gender']);
 
@@ -132,5 +166,3 @@ export class RegisterComponent {
     }
   }
 }
-
-
