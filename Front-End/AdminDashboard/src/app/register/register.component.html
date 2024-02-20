@@ -7,12 +7,15 @@
           <input
             formControlName="name"
             [value]="inputName"
-            class="inputWidthLong"
+            class="form-control inputWidthLong"
             type="text"
             id="name"
+            required
+            minlength="5"
           />
           <label id="name" for="name">Name</label>
         </div>
+        <!-- {{ console() }} -->
         <div class="d-flex m-2 justify-content-end">
           <!-- <div style="visibility: hidden"><span> valid name address</span></div> -->
 
@@ -30,6 +33,10 @@
           <div>
             <p class="text-danger">Name lentgh must be greater than 5</p>
           </div>
+          } @if(!nameValid.errors) {
+          <div>
+            <p class="text-green-600">valid Name</p>
+          </div>
           }
         </div>
       </div>
@@ -37,7 +44,7 @@
         <div class="d-flex flex-column-reverse">
           <input
             formControlName="email"
-            class="inputWidthLong"
+            class="form-control inputWidthLong"
             type="email"
             id="Email"
             title="error"
@@ -56,6 +63,10 @@
               invaild Email pattern enter example aaaa.aaaa&#64;aaaa
             </p>
           </div>
+          } @if(!emailValid.errors) {
+          <div>
+            <p class="text-green-600">valid Email</p>
+          </div>
           }
         </div>
       </div>
@@ -63,7 +74,7 @@
         <div class="d-flex flex-column-reverse">
           <input
             formControlName="phone"
-            class="inputWidthLong"
+            class="form-control inputWidthLong"
             type="text"
             id="PhoneNumber"
           />
@@ -79,52 +90,156 @@
           <div>
             <p class="text-danger">invaild phone pattern</p>
           </div>
+          } @if(!phoneValid.errors) {
+          <div>
+            <p class="text-green-600">valid Phone</p>
+          </div>
           }
         </div>
       </div>
       <div class="d-flex flex-column">
         <div class="d-flex flex-column-reverse">
-          <input class="inputWidthLong" type="password" id="Password" />
+          <input
+            class="form-control inputWidthLong"
+            type="password"
+            formControlName="Password"
+            id="Password"
+          />
           <label for="Password">Password</label>
         </div>
+        <!-- {{ console() }} -->
         <div class="d-flex m-2 justify-content-end">
-          <span> valid Password </span>
+          @if (PasswordValid.errors?.["required"] && PasswordValid.touched) {
+          <div>
+            <p class="text-danger">Password Required</p>
+          </div>
+          } @if ( PasswordValid.touched&&PasswordValid.errors?.["pattern"]) {
+          <div>
+            <span class="text-danger">
+              Password must contain at least one uppercase letter,<br />
+              one lowercase letter, one number,<br />
+              one special character, <br />and be between 8 to 30 characters
+              long.
+            </span>
+          </div>
+          } @if(!PasswordValid.errors) {
+          <div>
+            <p class="text-green-600">valid Password</p>
+          </div>
+          }
         </div>
       </div>
       <div class="d-flex flex-column">
         <div class="d-flex flex-column-reverse">
-          <input class="inputWidthLong" type="password" id="Password" />
-          <label for="Password">Current Password</label>
+          <input
+            class="form-control inputWidthLong"
+            formControlName="confirmPassword"
+            type="password"
+            id="confirmPassword"
+            [(ngModel)]="Password"
+          />
+          <!-- {{ registerValidation.controls["name"].errors?.["required"] }} -->
+          <label for="Password">Confirm Password</label>
         </div>
+        <!-- {{ console() }} -->
         <div class="d-flex m-2 justify-content-end">
-          <span> valid Password </span>
+          @if(registerValidation.controls['confirmPassword'].errors?.["required"]
+          &&confirmPasswordValid.touched ) {
+          <!-- {{ console() }} -->
+          <div>
+            <p class="text-danger">ConfirmPassword Required</p>
+          </div>
+          }
+          <div>
+            @if(registerValidation.errors?.["passwordNotMatch"]
+            &&confirmPasswordValid.touched ) {
+
+            <div>
+              <p class="text-danger">passwordNotMatch</p>
+            </div>
+            }@if(!registerValidation.controls['confirmPassword'].errors) {
+            <div>
+              <p class="text-green-600">valid ConfirmPassword</p>
+            </div>
+            }
+          </div>
         </div>
       </div>
 
       <div class="d-flex justify-content-center align-items-end">
         <div class="d-flex flex-column-reverse">
-          <input class="inputWidthShort" id="contry" type="text" />
+          <input
+            class="form-control inputWidthShort"
+            id="contry"
+            formControlName="country"
+            type="text"
+          />
+          @if(registerValidation.controls["country"].errors?.["required"]&&registerValidation.controls["country"].touched)
+          {
+
+          <span class="text-danger">country Required</span>
+
+          }
           <label for="contry">Country</label>
         </div>
+
         <div class="d-flex mx-5 flex-column-reverse">
-          <input class="inputWidthShort" id="City" type="text" />
+          <input
+            formControlName="city"
+            class="form-control inputWidthShort"
+            id="City"
+            type="text"
+          />
+
+          @if(registerValidation.controls["city"].errors?.["required"]&&registerValidation.controls["city"].touched)
+          {
+
+          <span class="text-danger">city Required</span>
+
+          }
           <label for="City">City</label>
         </div>
         <div class="d-flex flex-column-reverse">
-          <input class="inputWidthShort" id="Street" type="text" />
+          <input
+            formControlName="street"
+            class="form-control inputWidthShort"
+            id="Street"
+            type="text"
+          />
+          @if(registerValidation.controls["street"].errors?.["required"]&&registerValidation.controls["street"].touched)
+          {
+
+          <span class="text-danger">Street Required</span>
+
+          }
           <label for="Street">Street</label>
         </div>
       </div>
       <div class="d-flex">
         <div class="d-flex flex-column-reverse">
-          <select class="inputWidthShort" id="days">
+          <select
+            formControlName="day"
+            class="form-control inputWidthShort"
+            id="days"
+          >
             <option *ngFor="let day of days" [value]="day">
               {{ day }}
-            </option></select
-          ><label for="Year">Year</label>
+            </option>
+          </select>
+          @if(registerValidation.controls["day"].errors?.["required"]&&registerValidation.controls["day"].touched)
+          {
+
+          <span class="text-danger">Day Required</span>
+
+          }<label for="Year">Day</label>
         </div>
         <div class="d-flex flex-column-reverse mx-5">
-          <select id="months" class="inputWidthShort" name="months">
+          <select
+            formControlName="month"
+            id="months"
+            class="form-control inputWidthShort"
+            name="months"
+          >
             <option value="January">January</option>
             <option value="February">February</option>
             <option value="March">March</option>
@@ -138,14 +253,31 @@
             <option value="November">November</option>
             <option value="December">December</option>
           </select>
-          <label for="months">Month:</label>
+          @if(registerValidation.controls["month"].errors?.["required"]&&registerValidation.controls["month"].touched)
+          {
+
+          <span class="text-danger">Month Required</span>
+
+          }
+          <label for="months">Month</label>
         </div>
         <div class="d-flex flex-column-reverse">
-          <select class="inputWidthShort" id="years">
+          <select
+            formControlName="year"
+            class="form-control inputWidthShort"
+            id="years"
+          >
             <option *ngFor="let year of years" [value]="year">
               {{ year }}
-            </option></select
-          ><label for="Year">Year</label>
+            </option>
+          </select>
+          @if(registerValidation.controls["year"].errors?.["required"]&&registerValidation.controls["year"].touched)
+          {
+
+          <span class="text-danger">Year Required</span>
+
+          }
+          <label for="Year">Year</label>
         </div>
       </div>
       <div class="d-flex my-2">
@@ -161,7 +293,15 @@
           <div
             class="inputWidthShort bgc d-flex justify-content-center align-items-center mx-5"
           >
-            <input type="radio" name="male" id="male" />
+            <input
+              formControlName="gender"
+              class="form-control ml-8"
+              type="radio"
+              name="gender"
+              value="male"
+              id="male"
+            />
+
             <label for="male">Male</label>
           </div>
         </div>
@@ -169,19 +309,33 @@
           <div
             class="inputWidthShort bgc d-flex justify-content-center align-items-center"
           >
-            <input type="radio" name="female" id="female" />
+            <input
+              formControlName="gender"
+              class="form-control"
+              type="radio"
+              name="gender"
+              value="female"
+              id="female"
+            />
             <label for="female">Female</label>
           </div>
         </div>
+        @if(registerValidation.controls["gender"].errors?.["required"] &&
+        registerValidation.controls["gender"].touched) {
+
+        <span class="text-danger">Gender Required</span>
+
+        }
       </div>
       <div class="d-flex my-5 justify-content-center">
-        <input
+        <button
           (click)="submit()"
           class="d-flex justify-content-center align-items-center bgc w-25"
           type="submit"
-          value=" Sign UP"
           style="border: none"
-        />
+        >
+          Sign UP
+        </button>
       </div>
     </form>
   </div>

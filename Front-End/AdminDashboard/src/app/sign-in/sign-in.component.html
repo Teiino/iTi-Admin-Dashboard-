@@ -1,1 +1,76 @@
-<p class="alert alert-dark">sign-in works!</p>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- <link rel="stylesheet" href="fontawesome-free-6.5.1-web\"> -->
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="log">
+        <div class="photo">
+          <i class="icon fa-regular fa-user"></i>
+          <!-- [class]="nameFeedback?'invalid':'valid'" -->
+        </div>
+        <form [formGroup]="regValidation" class="inputs">
+          <div class="emailInput">
+            <div>
+              <input
+                [class]="emailinput"
+                [class.emailValid]="isEmailValid"
+                formControlName="email"
+                [(ngModel)]="email"
+                placeholder="Email"
+                type="text"
+              />
+            </div>
+            @if(this.regValidation.controls.email.valid== true) {
+            <p class="green" style="color: green">success</p>
+            }@if(this.regValidation.controls.email.valid== false &&
+            this.regValidation.controls.email.value){
+            <p class="green" style="color: rgb(214, 21, 21)">Invalid</p>
+            }
+            <!-- @if(regValidation.controls["email"].valid){
+                      <div>
+                    <span style="color: green;" class="emailSpan" >success</span>
+                     </div>}
+                    else{} -->
+            <!-- <div>
+                        <p style="color: red;">Name required</p>
+                      </div> -->
+          </div>
+
+          <div class="passwordInput">
+            <input
+              [class]="passwordinput"
+              formControlName="password"
+              [(ngModel)]="password"
+              placeholder="Password"
+              type="password"
+            />
+            <!-- @if(!passwordvalid){
+                      <div>
+                        <p style="color: red; ">password required</p>
+                        </div>
+                      } -->
+            @if(this.regValidation.controls.password.valid== true) {
+            <p class="green" style="color: green">success</p>
+            }@else if(this.regValidation.controls.password.valid== false &&
+            this.regValidation.controls.password.value){
+            <p class="green" style="color: rgb(214, 21, 21)">Invalid</p>
+            }
+          </div>
+        </form>
+        <!--
+                     } -->
+        <a class="forget">Forget Password?</a>
+        <button type="submit" (click)="login()">Login</button>
+      </div>
+    </div>
+    <script
+      src="https://kit.fontawesome.com/f28bbb902b.js"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

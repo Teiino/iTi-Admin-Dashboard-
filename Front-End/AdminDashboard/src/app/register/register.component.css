@@ -18,6 +18,7 @@ select {
 }
 .inputWidthShort {
   width: 6.4rem;
+
   margin-right: 1.4rem;
   height: 2.6rem;
 }
@@ -45,15 +46,47 @@ span {
   width: 30%;
 }
 
+input:focus + label,
+select:focus + label {
+  color: white;
+}
+/* input:invalid {
+  outline: 2px solid red;
+} */
+/* input:required {
+  outline: 2px solid #8c8c8c;
+} */
+
 input:focus,
 select:focus {
   outline: 2px solid white;
 }
 
-input:focus + label,
-select:focus + label {
-  color: white;
+/* input:valid {
+  outline: 2px solid green;
+} */
+
+/* input:required + label {
+  color: blue;
 }
-#name {
-  /* color: red; */
+input:valid + label {
+  color: yellow;
+} */
+input.ng-invalid.ng-touched,
+select.ng-invalid.ng-touched {
+  outline: 2px solid red;
+}
+
+input.ng-valid,
+select.ng-valid {
+  outline: 2px solid green;
+}
+
+input.ng-valid + label,
+select.ng-valid + label {
+  color: green;
+}
+input.ng-invalid.ng-touched + span + label,
+select.ng-invalid.ng-touched + span + label {
+  color: red;
 }

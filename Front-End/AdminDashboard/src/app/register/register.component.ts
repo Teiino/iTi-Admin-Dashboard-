@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import {
+  AbstractControl,
   FormControl,
   FormGroup,
   FormsModule,
@@ -20,28 +21,55 @@ export class RegisterComponent {
   days: number[] = [];
   inputName: string = '';
 
-  registerValidation = new FormGroup({
-    name: new FormControl('', [Validators.required, Validators.minLength(5)]),
-    email: new FormControl(
-      '',
-      Validators.compose([
+  registerValidation = new FormGroup(
+    {
+      name: new FormControl('', [Validators.required, Validators.minLength(5)]),
+      country: new FormControl('', [Validators.required]),
+      city: new FormControl('', [Validators.required]),
+      street: new FormControl('', [Validators.required]),
+      year: new FormControl('', [Validators.required]),
+      month: new FormControl('', [Validators.required]),
+      day: new FormControl('', [Validators.required]),
+      gender: new FormControl('', [Validators.required]),
+      email: new FormControl(
+        '',
+        Validators.compose([
+          Validators.required,
+          Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$'),
+        ])
+      ),
+      phone: new FormControl(
+        '',
+        Validators.compose([
+          Validators.required,
+
+          Validators.pattern(/^(011|012|010)\d{8}$/),
+        ])
+      ),
+      Password: new FormControl(
+        '',
+        Validators.compose([
+          Validators.required,
+          Validators.pattern(
+            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$@!%&*?])[A-Za-z\d#$@!%&*?]{8,30}$/
+          ),
+        ])
+      ),
+      confirmPassword: new FormControl('', [
         Validators.required,
-        Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$'),
-      ])
-    ),
-    phone: new FormControl(
-      '',
-      Validators.compose([
-        Validators.required,
-        Validators.pattern(/^(011|012|010)\d{8}$/),
-      ])
-    ),
-  });
+        Validators.pattern(
+          /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$@!%&*?])[A-Za-z\d#$@!%&*?]{8,30}$/
+        ),
+      ]),
+    },
+    { validators: this.passwordMatchValidator }
+  );
   constructor() {}
+  Password: any;
 
   ngOnInit(): void {
     const currentYear = new Date().getFullYear();
-    console.log(this.days);
+    // console.log(this.days);
     for (let i = 1990; i <= currentYear; i++) {
       this.years.push(i);
     }
@@ -63,12 +91,35 @@ export class RegisterComponent {
     //true || false
     return this.registerValidation.controls['phone'];
   }
-  submit() {
-    console.log(this.registerValidation);
+  get PasswordValid() {
+    //true || false
+    return this.registerValidation.controls['Password'];
+  }
+  get confirmPasswordValid() {
+    //true || false
+    return this.registerValidation.controls['confirmPassword'];
+  }
+  console() {
+    console.log('consle');
+  }
+  passwordMatchValidator(control: AbstractControl) {
+    if (
+      !control.get('Password')?.errors?.['required'] &&
+      control.get('Password')?.value !== control.get('confirmPassword')?.value
+    ) {
+      return { passwordNotMatch: true };
+    }
 
+    return null;
+  }
+  submit() {
     if (this.registerValidation.valid) {
+      console.log(this.registerValidation);
       alert('sucsess');
     } else {
+      // console.log(this.registerValidation);
+      console.log(this.registerValidation.controls['gender']);
+
       alert('invaild data');
     }
   }

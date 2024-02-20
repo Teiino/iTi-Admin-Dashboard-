@@ -5,6 +5,7 @@ import { RegisterComponent } from './register/register.component';
 import { SellerComponent } from './seller/seller.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { UserComponent } from './user/user.component';
+import { TestComponent } from './test/test.component';
 
 @Component({
   selector: 'app-root',
@@ -16,6 +17,7 @@ import { UserComponent } from './user/user.component';
     SellerComponent,
     SignInComponent,
     UserComponent,
+    TestComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',

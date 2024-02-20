@@ -1,0 +1,24 @@
+<h1>Demo of Angular Form Validation</h1>
+
+<form>
+  <label for="email">Email:</label>
+  <input
+    type="email"
+    id="email"
+    class="form-control"
+    [(ngModel)]="email"
+    name="email"
+    required
+  />
+  <div>
+    <div>
+      @if( emailFormControl.invalid && (emailFormControl.dirty ||
+      emailFormControl.touched)){ @if(emailFormControl.errors?.["required"]){
+      Email is required. } }
+    </div>
+    <div>
+      @if(emailFormControl.errors?.["email"]){ Please enter a valid email
+      address. }
+    </div>
+  </div>
+</form>
