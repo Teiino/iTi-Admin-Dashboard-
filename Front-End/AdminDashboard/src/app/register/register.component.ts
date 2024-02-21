@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   AbstractControl,
   FormControl,
@@ -62,7 +62,7 @@ export class RegisterComponent {
     }
     // { validators: this.passwordMatchValidator }
   );
-
+  constructor() {}
   Password: any;
 
   ngOnInit(): void {
@@ -79,6 +79,7 @@ export class RegisterComponent {
   }
   get nameValid() {
     //true || false
+
     return this.registerValidation.controls['name'];
   }
   get emailValid() {
@@ -110,16 +111,14 @@ export class RegisterComponent {
 
     return null;
   }
-
-  userdata: any = {};
   submit() {
+    console.log(this.inputName);
+
     if (this.registerValidation.valid) {
-      this.userdata = this.registerValidation.value;
-      console.log(this.userdata);
-      this.RService.postRegester(this.userdata).subscribe();
+      console.log(this.registerValidation);
       alert('sucsess');
     } else {
-      console.log(this.registerValidation);
+      // console.log(this.registerValidation);
       // console.log(this.registerValidation.controls['gender']);
       // this.RService.postRegester(this.userdata).subscribe();
       alert('invaild data');

@@ -8,4 +8,9 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './user.component.html',
   styleUrl: './user.component.css',
 })
-export class UserComponent {}
+export class UserComponent implements OnInit {
+  constructor(private UService: UsersService) {}
+  ngOnInit() {
+    console.log(this.UService.GetAllUsers());
+  }
+}
