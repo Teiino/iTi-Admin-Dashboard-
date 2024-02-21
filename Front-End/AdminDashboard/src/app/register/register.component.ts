@@ -20,7 +20,6 @@ import { HttpClientModule } from '@angular/common/http';
   styleUrl: './register.component.css',
 })
 export class RegisterComponent {
-  constructor(private RService: UsersService) {}
   years: number[] = [];
   days: number[] = [];
   inputName: string = '';
@@ -59,10 +58,16 @@ export class RegisterComponent {
           ),
         ])
       ),
-    }
-    // { validators: this.passwordMatchValidator }
+      confirmPassword: new FormControl('', [
+        Validators.required,
+        Validators.pattern(
+          /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$@!%&*?])[A-Za-z\d#$@!%&*?]{8,30}$/
+        ),
+      ]),
+    },
+    { validators: this.passwordMatchValidator }
   );
-
+  constructor() {}
   Password: any;
 
   ngOnInit(): void {
@@ -94,10 +99,10 @@ export class RegisterComponent {
     //true || false
     return this.registerValidation.controls['Password'];
   }
-  // get confirmPasswordValid() {
-  //true || false
-  // return this.registerValidation.controls['confirmPassword'];
-  // }
+  get confirmPasswordValid() {
+    //true || false
+    return this.registerValidation.controls['confirmPassword'];
+  }
   console() {
     console.log('consle');
   }
@@ -111,16 +116,52 @@ export class RegisterComponent {
 
     return null;
   }
+  userObj: any;
+  newDate: any;
+  newDateFormat: any;
   submit() {
     console.log(this.inputName);
 
     if (this.registerValidation.valid) {
-      console.log(this.registerValidation);
+      this.newDate = new Date(
+        `${this.registerValidation.value.year}-${this.registerValidation.value.month}-${this.registerValidation.value.day}`
+      );
+
+      const year = this.newDate.getFullYear();
+      const month = String(this.newDate.getMonth() + 1).padStart(2, '0');
+      const day = String(this.newDate.getDate()).padStart(2, '0');
+      this.newDateFormat = `${year}-${month}-${day}`;
+      console.log(this.newDateFormat);
+
+      this.userObj = {
+        name: this.registerValidation.value.name,
+        email: this.registerValidation.value.email,
+        password: this.registerValidation.value.Password,
+        gender: this.registerValidation.value.gender,
+        dateOfBirth: this.newDateFormat,
+        phonenumber: this.registerValidation.value.phone,
+        address: {
+          street: this.registerValidation.value.street,
+          city: this.registerValidation.value.city,
+          country: this.registerValidation.value.country,
+        },
+      };
+
+      console.log(this.userObj);
+
+      this.UService.addNewStudent(this.userObj).subscribe({
+        complete: () => {
+          alert('Added Successfully');
+        },
+      });
+
+      console.log(this.registerValidation.value);
       alert('sucsess');
     } else {
+      console.log(this.registerValidation.value.name);
       // console.log(this.registerValidation);
       // console.log(this.registerValidation.controls['gender']);
-      // this.RService.postRegester(this.userdata).subscribe();
+
       alert('invaild data');
     }
   }
