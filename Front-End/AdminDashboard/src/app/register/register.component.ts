@@ -8,15 +8,19 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { UsersService } from '../services/users.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, FormsModule],
+  imports: [ReactiveFormsModule, CommonModule, FormsModule, HttpClientModule],
+  providers: [UsersService],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css',
 })
 export class RegisterComponent {
+  constructor(private RService: UsersService) {}
   years: number[] = [];
   days: number[] = [];
   inputName: string = '';
@@ -55,16 +59,10 @@ export class RegisterComponent {
           ),
         ])
       ),
-      confirmPassword: new FormControl('', [
-        Validators.required,
-        Validators.pattern(
-          /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$@!%&*?])[A-Za-z\d#$@!%&*?]{8,30}$/
-        ),
-      ]),
-    },
-    { validators: this.passwordMatchValidator }
+    }
+    // { validators: this.passwordMatchValidator }
   );
-  constructor() {}
+
   Password: any;
 
   ngOnInit(): void {
@@ -95,10 +93,10 @@ export class RegisterComponent {
     //true || false
     return this.registerValidation.controls['Password'];
   }
-  get confirmPasswordValid() {
-    //true || false
-    return this.registerValidation.controls['confirmPassword'];
-  }
+  // get confirmPasswordValid() {
+  //true || false
+  // return this.registerValidation.controls['confirmPassword'];
+  // }
   console() {
     console.log('consle');
   }
@@ -112,14 +110,18 @@ export class RegisterComponent {
 
     return null;
   }
+
+  userdata: any = {};
   submit() {
     if (this.registerValidation.valid) {
-      console.log(this.registerValidation);
+      this.userdata = this.registerValidation.value;
+      console.log(this.userdata);
+      this.RService.postRegester(this.userdata).subscribe();
       alert('sucsess');
     } else {
-      // console.log(this.registerValidation);
+      console.log(this.registerValidation);
       // console.log(this.registerValidation.controls['gender']);
-
+      // this.RService.postRegester(this.userdata).subscribe();
       alert('invaild data');
     }
   }
