@@ -62,7 +62,7 @@ export class RegisterComponent {
     }
     // { validators: this.passwordMatchValidator }
   );
-  constructor() {}
+
   Password: any;
 
   ngOnInit(): void {
