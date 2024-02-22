@@ -22,4 +22,37 @@ export class UsersService {
   addNewStudent(student: any) {
     return this.myUsers.post(`${this.DB_URL}/users/signup`, student);
   }
+
+  addNewCategory(category: any) {
+    let headers = new HttpHeaders();
+    headers = headers.set('Authorization', this.apiKey);
+    return this.myUsers.post(
+      `${this.DB_URL}/categories`,
+
+      category,
+      {
+        headers: headers,
+      }
+    );
+  }
+
+  getCategories() {
+    return this.myUsers.get(`${this.DB_URL}/categories`);
+  }
+  getBrands() {
+    return this.myUsers.get(`${this.DB_URL}/brands`);
+  }
+
+  addNewBrand(category: any) {
+    let headers = new HttpHeaders();
+    headers = headers.set('Authorization', this.apiKey);
+    return this.myUsers.post(
+      `${this.DB_URL}/brands`,
+
+      category,
+      {
+        headers: headers,
+      }
+    );
+  }
 }

@@ -9,6 +9,8 @@ import { TestComponent } from './test/test.component';
 import { CommonModule } from '@angular/common';
 import { OneUserComponent } from './one-user/one-user.component';
 import { UsersComponent } from './users/users.component';
+import { AddCategoryComponent } from './add-category/add-category.component';
+import { AddBrandComponent } from './add-brand/add-brand.component';
 
 @Component({
   selector: 'app-root',
@@ -25,6 +27,8 @@ import { UsersComponent } from './users/users.component';
     OneUserComponent,
     UsersComponent,
     RouterModule,
+    AddCategoryComponent,
+    AddBrandComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
