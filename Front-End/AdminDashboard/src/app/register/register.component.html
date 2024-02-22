@@ -1,342 +1,347 @@
-<div class="home p-5 container d-flex flex-column align-items-center">
-  <div><h2>Register</h2></div>
-  <div>
-    <form [formGroup]="registerValidation" action="">
-      <div class="d-flex flex-column">
-        <div class="d-flex flex-column-reverse">
-          <input
-            formControlName="name"
-            [value]="inputName"
-            class="form-control inputWidthLong"
-            type="text"
-            id="name"
-            required
-            minlength="5"
-          />
-          <label id="name" for="name">Name</label>
-        </div>
-        <!-- {{ console() }} -->
-        <div class="d-flex m-2 justify-content-end">
-          <!-- <div style="visibility: hidden"><span> valid name address</span></div> -->
-
-          @if (nameValid.errors?.["required"]&&nameValid.touched) {
-          <div>
-            <p class="text-danger">Name Required</p>
+<div class="d-flex">
+  <div class="home p-5 container d-flex flex-column align-items-center">
+    <div><h2>Register</h2></div>
+    <div>
+      <form [formGroup]="registerValidation" action="">
+        <div class="d-flex flex-column">
+          <div class="d-flex flex-column-reverse">
+            <input
+              formControlName="name"
+              [value]="inputName"
+              class="form-control inputWidthLong"
+              type="text"
+              id="name"
+              required
+              minlength="5"
+            />
+            <label id="name" for="name">Name</label>
           </div>
-          }
-          <!-- @if (!nameValid.errors?.["pattern"]) {
+          <!-- {{ console() }} -->
+          <div class="d-flex m-2 justify-content-end">
+            <!-- <div style="visibility: hidden"><span> valid name address</span></div> -->
+
+            @if (nameValid.errors?.["required"]&&nameValid.touched) {
+            <div>
+              <p class="text-danger">Name Required</p>
+            </div>
+            }
+            <!-- @if (!nameValid.errors?.["pattern"]) {
           <div>
             <p class="text-danger">Name must be text</p>
           </div>
           }  -->
-          @if (nameValid.errors?.['minlength']) {
-          <div>
-            <p class="text-danger">Name lentgh must be greater than 5</p>
-          </div>
-          } @if(!nameValid.errors) {
-          <div>
-            <p class="text-green-600">valid Name</p>
-          </div>
-          }
-        </div>
-      </div>
-      <div class="d-flex flex-column">
-        <div class="d-flex flex-column-reverse">
-          <input
-            formControlName="email"
-            class="form-control inputWidthLong"
-            type="email"
-            id="Email"
-            title="error"
-          />
-          <label for="Email">Email</label>
-        </div>
-        <div class="d-flex m-2 justify-content-end">
-          <!-- <span> valid Email address</span> -->
-          @if (emailValid.errors?.["required"]&&emailValid.touched) {
-          <div>
-            <p class="text-danger">Email Required</p>
-          </div>
-          } @if (emailValid.errors?.["pattern"]&&emailValid.touched) {
-          <div>
-            <p class="text-danger">
-              invaild Email pattern enter example aaaa.aaaa&#64;aaaa
-            </p>
-          </div>
-          } @if(!emailValid.errors) {
-          <div>
-            <p class="text-green-600">valid Email</p>
-          </div>
-          }
-        </div>
-      </div>
-      <div class="d-flex flex-column">
-        <div class="d-flex flex-column-reverse">
-          <input
-            formControlName="phone"
-            class="form-control inputWidthLong"
-            type="text"
-            id="PhoneNumber"
-          />
-          <label for="PhoneNumber">Phone Number</label>
-        </div>
-        <div class="d-flex m-2 justify-content-end">
-          <!-- <span> valid Phone Number</span> -->
-          @if (phoneValid.errors?.["required"]&&phoneValid.touched) {
-          <div>
-            <p class="text-danger">phone Required</p>
-          </div>
-          } @if (phoneValid.errors?.["pattern"]&&phoneValid.touched) {
-          <div>
-            <p class="text-danger">invaild phone pattern</p>
-          </div>
-          } @if(!phoneValid.errors) {
-          <div>
-            <p class="text-green-600">valid Phone</p>
-          </div>
-          }
-        </div>
-      </div>
-      <div class="d-flex flex-column">
-        <div class="d-flex flex-column-reverse">
-          <input
-            class="form-control inputWidthLong"
-            type="password"
-            formControlName="Password"
-            id="Password"
-          />
-          <label for="Password">Password</label>
-        </div>
-        <!-- {{ console() }} -->
-        <div class="d-flex m-2 justify-content-end">
-          @if (PasswordValid.errors?.["required"] && PasswordValid.touched) {
-          <div>
-            <p class="text-danger">Password Required</p>
-          </div>
-          } @if ( PasswordValid.touched&&PasswordValid.errors?.["pattern"]) {
-          <div>
-            <span class="text-danger">
-              Password must contain at least one uppercase letter,<br />
-              one lowercase letter, one number,<br />
-              one special character, <br />and be between 8 to 30 characters
-              long.
-            </span>
-          </div>
-          } @if(!PasswordValid.errors) {
-          <div>
-            <p class="text-green-600">valid Password</p>
-          </div>
-          }
-        </div>
-      </div>
-      <div class="d-flex flex-column">
-        <div class="d-flex flex-column-reverse">
-          <input
-            class="form-control inputWidthLong"
-            formControlName="confirmPassword"
-            type="password"
-            id="confirmPassword"
-            [(ngModel)]="Password"
-          />
-          <!-- {{ registerValidation.controls["name"].errors?.["required"] }} -->
-          <label for="Password">Confirm Password</label>
-        </div>
-        <!-- {{ console() }} -->
-        <div class="d-flex m-2 justify-content-end">
-          @if(registerValidation.controls['confirmPassword'].errors?.["required"]
-          &&confirmPasswordValid.touched ) {
-          <!-- {{ console() }} -->
-          <div>
-            <p class="text-danger">ConfirmPassword Required</p>
-          </div>
-          }
-          <div>
-            @if(registerValidation.errors?.["passwordNotMatch"]
-            &&confirmPasswordValid.touched ) {
-
+            @if (nameValid.errors?.['minlength']) {
             <div>
-              <p class="text-danger">passwordNotMatch</p>
+              <p class="text-danger">Name lentgh must be greater than 5</p>
             </div>
-            }@if(!registerValidation.controls['confirmPassword'].errors) {
+            } @if(!nameValid.errors) {
             <div>
-              <p class="text-green-600">valid ConfirmPassword</p>
+              <p class="text-green-600">valid Name</p>
             </div>
             }
           </div>
         </div>
-      </div>
-
-      <div class="d-flex justify-content-center align-items-end">
-        <div class="d-flex flex-column-reverse">
-          <input
-            class="form-control inputWidthShort"
-            id="contry"
-            formControlName="country"
-            type="text"
-          />
-          @if(registerValidation.controls["country"].errors?.["required"]&&registerValidation.controls["country"].touched)
-          {
-
-          <span class="text-danger">country Required</span>
-
-          }
-          <label for="contry">Country</label>
-        </div>
-
-        <div class="d-flex mx-5 flex-column-reverse">
-          <input
-            formControlName="city"
-            class="form-control inputWidthShort"
-            id="City"
-            type="text"
-          />
-
-          @if(registerValidation.controls["city"].errors?.["required"]&&registerValidation.controls["city"].touched)
-          {
-
-          <span class="text-danger">city Required</span>
-
-          }
-          <label for="City">City</label>
-        </div>
-        <div class="d-flex flex-column-reverse">
-          <input
-            formControlName="street"
-            class="form-control inputWidthShort"
-            id="Street"
-            type="text"
-          />
-          @if(registerValidation.controls["street"].errors?.["required"]&&registerValidation.controls["street"].touched)
-          {
-
-          <span class="text-danger">Street Required</span>
-
-          }
-          <label for="Street">Street</label>
-        </div>
-      </div>
-      <div class="d-flex">
-        <div class="d-flex flex-column-reverse">
-          <select
-            formControlName="day"
-            class="form-control inputWidthShort"
-            id="days"
-          >
-            <option *ngFor="let day of days" [value]="day">
-              {{ day }}
-            </option>
-          </select>
-          @if(registerValidation.controls["day"].errors?.["required"]&&registerValidation.controls["day"].touched)
-          {
-
-          <span class="text-danger">Day Required</span>
-
-          }<label for="Year">Day</label>
-        </div>
-        <div class="d-flex flex-column-reverse mx-5">
-          <select
-            formControlName="month"
-            id="months"
-            class="form-control inputWidthShort"
-            name="months"
-          >
-            <option value="January">January</option>
-            <option value="February">February</option>
-            <option value="March">March</option>
-            <option value="April">April</option>
-            <option value="May">May</option>
-            <option value="June">June</option>
-            <option value="July">July</option>
-            <option value="August">August</option>
-            <option value="September">September</option>
-            <option value="October">October</option>
-            <option value="November">November</option>
-            <option value="December">December</option>
-          </select>
-          @if(registerValidation.controls["month"].errors?.["required"]&&registerValidation.controls["month"].touched)
-          {
-
-          <span class="text-danger">Month Required</span>
-
-          }
-          <label for="months">Month</label>
-        </div>
-        <div class="d-flex flex-column-reverse">
-          <select
-            formControlName="year"
-            class="form-control inputWidthShort"
-            id="years"
-          >
-            <option *ngFor="let year of years" [value]="year">
-              {{ year }}
-            </option>
-          </select>
-          @if(registerValidation.controls["year"].errors?.["required"]&&registerValidation.controls["year"].touched)
-          {
-
-          <span class="text-danger">Year Required</span>
-
-          }
-          <label for="Year">Year</label>
-        </div>
-      </div>
-      <div class="d-flex my-2">
         <div class="d-flex flex-column">
-          <div
-            class="inputWidthShort d-flex justify-content-center align-items-center"
-            style="height: 3rem; font-size: larger"
-          >
-            <label>GENDER</label>
+          <div class="d-flex flex-column-reverse">
+            <input
+              formControlName="email"
+              class="form-control inputWidthLong"
+              type="email"
+              id="Email"
+              title="error"
+            />
+            <label for="Email">Email</label>
+          </div>
+          <div class="d-flex m-2 justify-content-end">
+            <!-- <span> valid Email address</span> -->
+            @if (emailValid.errors?.["required"]&&emailValid.touched) {
+            <div>
+              <p class="text-danger">Email Required</p>
+            </div>
+            } @if (emailValid.errors?.["pattern"]&&emailValid.touched) {
+            <div>
+              <p class="text-danger">
+                invaild Email pattern enter example aaaa.aaaa&#64;aaaa
+              </p>
+            </div>
+            } @if(!emailValid.errors) {
+            <div>
+              <p class="text-green-600">valid Email</p>
+            </div>
+            }
           </div>
         </div>
         <div class="d-flex flex-column">
-          <div
-            class="inputWidthShort bgc d-flex justify-content-center align-items-center mx-5"
-          >
+          <div class="d-flex flex-column-reverse">
             <input
-              formControlName="gender"
-              class="form-control ml-8"
-              type="radio"
-              name="gender"
-              value="male"
-              id="male"
+              formControlName="phone"
+              class="form-control inputWidthLong"
+              type="text"
+              id="PhoneNumber"
+            />
+            <label for="PhoneNumber">Phone Number</label>
+          </div>
+          <div class="d-flex m-2 justify-content-end">
+            <!-- <span> valid Phone Number</span> -->
+            @if (phoneValid.errors?.["required"]&&phoneValid.touched) {
+            <div>
+              <p class="text-danger">phone Required</p>
+            </div>
+            } @if (phoneValid.errors?.["pattern"]&&phoneValid.touched) {
+            <div>
+              <p class="text-danger">invaild phone pattern</p>
+            </div>
+            } @if(!phoneValid.errors) {
+            <div>
+              <p class="text-green-600">valid Phone</p>
+            </div>
+            }
+          </div>
+        </div>
+        <div class="d-flex flex-column">
+          <div class="d-flex flex-column-reverse">
+            <input
+              class="form-control inputWidthLong"
+              type="password"
+              formControlName="Password"
+              id="Password"
+            />
+            <label for="Password">Password</label>
+          </div>
+          <!-- {{ console() }} -->
+          <div class="d-flex m-2 justify-content-end">
+            @if (PasswordValid.errors?.["required"] && PasswordValid.touched) {
+            <div>
+              <p class="text-danger">Password Required</p>
+            </div>
+            } @if ( PasswordValid.touched&&PasswordValid.errors?.["pattern"]) {
+            <div>
+              <span class="text-danger">
+                Password must contain at least one uppercase letter,<br />
+                one lowercase letter, one number,<br />
+                one special character, <br />and be between 8 to 30 characters
+                long.
+              </span>
+            </div>
+            } @if(!PasswordValid.errors) {
+            <div>
+              <p class="text-green-600">valid Password</p>
+            </div>
+            }
+          </div>
+        </div>
+        <div class="d-flex flex-column">
+          <div class="d-flex flex-column-reverse">
+            <input
+              class="form-control inputWidthLong"
+              formControlName="confirmPassword"
+              type="password"
+              id="confirmPassword"
+              [(ngModel)]="Password"
+            />
+            <!-- {{ registerValidation.controls["name"].errors?.["required"] }} -->
+            <label for="Password">Confirm Password</label>
+          </div>
+          <!-- {{ console() }} -->
+          <div class="d-flex m-2 justify-content-end">
+            @if(registerValidation.controls['confirmPassword'].errors?.["required"]
+            &&confirmPasswordValid.touched ) {
+            <!-- {{ console() }} -->
+            <div>
+              <p class="text-danger">ConfirmPassword Required</p>
+            </div>
+            }
+            <div>
+              @if(registerValidation.errors?.["passwordNotMatch"]
+              &&confirmPasswordValid.touched ) {
+
+              <div>
+                <p class="text-danger">passwordNotMatch</p>
+              </div>
+              }@if(!registerValidation.controls['confirmPassword'].errors) {
+              <div>
+                <p class="text-green-600">valid ConfirmPassword</p>
+              </div>
+              }
+            </div>
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-center align-items-end">
+          <div class="d-flex flex-column-reverse">
+            <input
+              class="form-control inputWidthShort"
+              id="contry"
+              formControlName="country"
+              type="text"
+            />
+            @if(registerValidation.controls["country"].errors?.["required"]&&registerValidation.controls["country"].touched)
+            {
+
+            <span class="text-danger">country Required</span>
+
+            }
+            <label for="contry">Country</label>
+          </div>
+
+          <div class="d-flex mx-5 flex-column-reverse">
+            <input
+              formControlName="city"
+              class="form-control inputWidthShort"
+              id="City"
+              type="text"
             />
 
-            <label for="male">Male</label>
+            @if(registerValidation.controls["city"].errors?.["required"]&&registerValidation.controls["city"].touched)
+            {
+
+            <span class="text-danger">city Required</span>
+
+            }
+            <label for="City">City</label>
           </div>
-        </div>
-        <div class="d-flex flex-column">
-          <div
-            class="inputWidthShort bgc d-flex justify-content-center align-items-center"
-          >
+          <div class="d-flex flex-column-reverse">
             <input
-              formControlName="gender"
-              class="form-control"
-              type="radio"
-              name="gender"
-              value="female"
-              id="female"
+              formControlName="street"
+              class="form-control inputWidthShort"
+              id="Street"
+              type="text"
             />
-            <label for="female">Female</label>
+            @if(registerValidation.controls["street"].errors?.["required"]&&registerValidation.controls["street"].touched)
+            {
+
+            <span class="text-danger">Street Required</span>
+
+            }
+            <label for="Street">Street</label>
           </div>
         </div>
-        @if(registerValidation.controls["gender"].errors?.["required"] &&
-        registerValidation.controls["gender"].touched) {
+        <div class="d-flex">
+          <div class="d-flex flex-column-reverse">
+            <select
+              formControlName="day"
+              class="form-control inputWidthShort"
+              id="days"
+            >
+              <option *ngFor="let day of days" [value]="day">
+                {{ day }}
+              </option>
+            </select>
+            @if(registerValidation.controls["day"].errors?.["required"]&&registerValidation.controls["day"].touched)
+            {
 
-        <span class="text-danger">Gender Required</span>
+            <span class="text-danger">Day Required</span>
 
-        }
-      </div>
-      <div class="d-flex my-5 justify-content-center">
-        <button
-          (click)="submit()"
-          class="d-flex justify-content-center align-items-center bgc w-25"
-          type="submit"
-          style="border: none"
-        >
-          Sign UP
-        </button>
-      </div>
-    </form>
+            }<label for="Year">Day</label>
+          </div>
+          <div class="d-flex flex-column-reverse mx-5">
+            <select
+              formControlName="month"
+              id="months"
+              class="form-control inputWidthShort"
+              name="months"
+            >
+              <option value="January">January</option>
+              <option value="February">February</option>
+              <option value="March">March</option>
+              <option value="April">April</option>
+              <option value="May">May</option>
+              <option value="June">June</option>
+              <option value="July">July</option>
+              <option value="August">August</option>
+              <option value="September">September</option>
+              <option value="October">October</option>
+              <option value="November">November</option>
+              <option value="December">December</option>
+            </select>
+            @if(registerValidation.controls["month"].errors?.["required"]&&registerValidation.controls["month"].touched)
+            {
+
+            <span class="text-danger">Month Required</span>
+
+            }
+            <label for="months">Month</label>
+          </div>
+          <div class="d-flex flex-column-reverse">
+            <select
+              formControlName="year"
+              class="form-control inputWidthShort"
+              id="years"
+            >
+              <option *ngFor="let year of years" [value]="year">
+                {{ year }}
+              </option>
+            </select>
+            @if(registerValidation.controls["year"].errors?.["required"]&&registerValidation.controls["year"].touched)
+            {
+
+            <span class="text-danger">Year Required</span>
+
+            }
+            <label for="Year">Year</label>
+          </div>
+        </div>
+        <div class="d-flex my-2">
+          <div class="d-flex flex-column">
+            <div
+              class="inputWidthShort d-flex justify-content-center align-items-center"
+              style="height: 3rem; font-size: larger"
+            >
+              <label>GENDER</label>
+            </div>
+          </div>
+          <div class="d-flex flex-column">
+            <div
+              class="inputWidthShort bgc d-flex justify-content-center align-items-center mx-5"
+            >
+              <input
+                formControlName="gender"
+                class="form-control ml-8"
+                type="radio"
+                name="gender"
+                value="male"
+                id="male"
+              />
+
+              <label for="male">Male</label>
+            </div>
+          </div>
+          <div class="d-flex flex-column">
+            <div
+              class="inputWidthShort bgc d-flex justify-content-center align-items-center"
+            >
+              <input
+                formControlName="gender"
+                class="form-control"
+                type="radio"
+                name="gender"
+                value="female"
+                id="female"
+              />
+              <label for="female">Female</label>
+            </div>
+          </div>
+          @if(registerValidation.controls["gender"].errors?.["required"] &&
+          registerValidation.controls["gender"].touched) {
+
+          <span class="text-danger">Gender Required</span>
+
+          }
+        </div>
+        <div class="d-flex my-5 justify-content-center">
+          <button
+            (click)="submit()"
+            class="d-flex justify-content-center align-items-center bgc w-25"
+            type="submit"
+            style="border: none"
+          >
+            Sign UP
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div>
+    <app-users> </app-users>
   </div>
 </div>

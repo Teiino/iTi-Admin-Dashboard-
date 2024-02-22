@@ -10,11 +10,18 @@ import {
 } from '@angular/forms';
 import { UsersService } from '../services/users.service';
 import { HttpClientModule } from '@angular/common/http';
+import { UsersComponent } from '../users/users.component';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, FormsModule, HttpClientModule],
+  imports: [
+    ReactiveFormsModule,
+    CommonModule,
+    FormsModule,
+    HttpClientModule,
+    UsersComponent,
+  ],
   providers: [UsersService],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css',
@@ -67,7 +74,7 @@ export class RegisterComponent {
     },
     { validators: this.passwordMatchValidator }
   );
-  constructor() {}
+  constructor(private UService: UsersService) {}
   Password: any;
 
   ngOnInit(): void {
