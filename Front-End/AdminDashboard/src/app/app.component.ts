@@ -11,6 +11,7 @@ import { OneUserComponent } from './one-user/one-user.component';
 import { UsersComponent } from './users/users.component';
 import { AddCategoryComponent } from './add-category/add-category.component';
 import { AddBrandComponent } from './add-brand/add-brand.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @Component({
   selector: 'app-root',
@@ -29,6 +30,7 @@ import { AddBrandComponent } from './add-brand/add-brand.component';
     RouterModule,
     AddCategoryComponent,
     AddBrandComponent,
+    NavbarComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',

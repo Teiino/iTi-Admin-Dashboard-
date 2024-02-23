@@ -33,7 +33,11 @@ export class RegisterComponent {
 
   registerValidation = new FormGroup(
     {
-      name: new FormControl('', [Validators.required, Validators.minLength(5)]),
+      name: new FormControl('', [
+        Validators.required,
+        Validators.minLength(5),
+        Validators.pattern('^[A-Za-z0-9][A-Za-z0-9 .-_]*[A-Za-z0-9]$'),
+      ]),
       country: new FormControl('', [Validators.required]),
       city: new FormControl('', [Validators.required]),
       street: new FormControl('', [Validators.required]),
