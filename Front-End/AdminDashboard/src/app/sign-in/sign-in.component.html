@@ -7,6 +7,12 @@
     <!-- <link rel="stylesheet" href="fontawesome-free-6.5.1-web\"> -->
   </head>
   <body>
+    <!-- @if(true){
+    {{ showSpinner() }}
+    } -->
+    <!-- <button nbButton status="success" (click)="showSpinner()">
+      Start Spinner
+    </button> -->
     <div class="wrapper">
       <div class="log">
         <div class="photo">
@@ -22,7 +28,7 @@
                 formControlName="email"
                 [(ngModel)]="email"
                 placeholder="Email"
-                type="text"
+                type="email"
               />
             </div>
             @if(this.regValidation.controls.email.valid== true) {
@@ -64,8 +70,10 @@
         </form>
         <!--
                      } -->
-        <a class="forget">Forget Password?</a>
-        <button type="submit" (click)="login()">Login</button>
+        <!-- <a class="forget">Forget Password?</a> -->
+        <button type="submit" (click)="showSpinner()" (click)="login()">
+          Login
+        </button>
 
         <button routerLink="/regester" class="btn btn-outline-dark">
           Creat New Acount

@@ -1,20 +1,16 @@
 import { CommonModule, registerLocaleData } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   FormControl,
   FormGroup,
   FormsModule,
+  NgModel,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-
-import {
-  ActivatedRoute,
-  NavigationExtras,
-  Router,
-  RouterModule,
-} from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { UsersService } from '../services/users.service';
 
 @Component({
@@ -31,22 +27,31 @@ import { UsersService } from '../services/users.service';
   templateUrl: './sign-in.component.html',
   styleUrl: './sign-in.component.css',
 })
-export class SignInComponent {
+export class SignInComponent implements OnInit {
   constructor(
     private UService: UsersService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private spinner: NgxSpinnerService
   ) {}
+  ngOnInit() {
+    /** spinner starts on init */
+    // this.spinner.show();
+    // setTimeout(() => {
+    //   /** spinner ends after 5 seconds */
+    //   this.spinner.hide();
+    // }, 500);
+  }
   email = '';
   password = '';
   red = false;
   isEmailValid = false;
   emailinput = 'emailinput';
   passwordinput = 'passinput';
-  user: any = {
-    email: 'admin2@gmail.com',
-    password: '123456',
-  };
+  // user: any = {
+  //   email: 'ahmedabdozeko@gmail.com',
+  //   password: '123456',
+  // };
   goToItems() {
     this.router.navigate(['loginadmin'], { relativeTo: this.route });
   }
@@ -59,18 +64,24 @@ export class SignInComponent {
     ]),
     password: new FormControl('', [
       Validators.required,
-      Validators.minLength(10),
+      Validators.minLength(5),
     ]),
   });
   get emailvalid() {
     console.log('This is emailvalid get');
 
-    return this.regValidation.controls['email'].valid;
+    return this.regValidation.controls['email'];
   }
   get passwordvalid() {
     console.log('This is password valid get');
 
-    return this.regValidation.controls['password'].valid;
+    return this.regValidation.controls['password'];
+  }
+  showSpinner() {
+    this.spinner.show();
+    setTimeout(() => {
+      this.spinner.hide();
+    }, 3000);
   }
   // login(e: any, p: any) {
 
@@ -89,16 +100,22 @@ export class SignInComponent {
     // console.log(EmailValid);
     console.log(this.regValidation);
     if (this.regValidation.status == 'VALID') {
-      this.emailinput = 'emailinput';
-      this.passwordinput = 'passinput';
-      console.log(this.regValidation.controls.email.valid);
+      const userLogin = {
+        email: this.emailvalid.value,
+        password: this.passwordvalid.value,
+      };
+
+      // this.emailinput = 'emailinput';
+      // this.passwordinput = 'passinput';
+      // console.log(this.regValidation.controls.email.valid);
       // alert('login sucsess');
       // this.goToItems();
       // this.router.navigate(['loginadmin'], { relativeTo: this.route });
-      this.UService.login(this.user).subscribe({
-        next: (data) => {
+      this.UService.login(userLogin).subscribe({
+        next: (data: any) => {
           // const data = data.token;
           console.log(data);
+          this.UService.setToken(data.body.token);
         },
         complete: () => {
           // alert('login sucsess');

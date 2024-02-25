@@ -1,32 +1,33 @@
-*{
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 }
-.userCardWrapper{
-    width: 12rem;
-    height: 16rem;
-    border: 1px gold solid;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    text-align: center;
-    background-color: rgb(240, 238, 238);
-    border-radius: 20px;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    position: relative;
-    gap: 20px;
-}
-
-.usersName{
-    font-size: larger;
+.userCardWrapper {
+  width: 12rem;
+  height: 16rem;
+  border: 1px gold solid;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+  text-align: center;
+  background-color: rgb(240, 238, 238);
+  border-radius: 20px;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  position: relative;
+  gap: 20px;
 }
 
-.icons{
-    display: flex;
-    justify-content: space-around;
-    justify-items: center;
-    width: 100%;
-    /* margin-top: 10px; */
+.usersName {
+  font-size: larger;
+}
+
+.icons {
+  display: flex;
+  justify-content: space-around;
+  justify-items: center;
+  width: 100%;
+  /* margin-top: 10px; */
 }

@@ -1,3 +1,4 @@
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import {
@@ -21,6 +22,7 @@ import { UsersComponent } from '../users/users.component';
     FormsModule,
     HttpClientModule,
     UsersComponent,
+    RouterModule,
   ],
   providers: [UsersService],
   templateUrl: './register.component.html',
@@ -78,7 +80,11 @@ export class RegisterComponent {
     },
     { validators: this.passwordMatchValidator }
   );
-  constructor(private UService: UsersService) {}
+  constructor(
+    private UService: UsersService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
   Password: any;
 
   ngOnInit(): void {
@@ -165,7 +171,12 @@ export class RegisterComponent {
           alert('Added Successfully');
         },
       });
-
+      this.router.navigate(['/'], {
+        relativeTo: this.route,
+      });
+      this.router.navigate(['/'], {
+        relativeTo: this.route,
+      });
       console.log(this.registerValidation.value);
       alert('sucsess');
     } else {

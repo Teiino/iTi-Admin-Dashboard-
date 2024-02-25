@@ -1,5 +1,7 @@
 import { AdminComponent } from './admin/admin.component';
-import { Component } from '@angular/core';
+import { Component, NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgxSpinnerModule } from 'ngx-spinner';
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { RegisterComponent } from './register/register.component';
 import { SellerComponent } from './seller/seller.component';
@@ -31,7 +33,9 @@ import { NavbarComponent } from './navbar/navbar.component';
     AddCategoryComponent,
     AddBrandComponent,
     NavbarComponent,
+    NgxSpinnerModule,
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })

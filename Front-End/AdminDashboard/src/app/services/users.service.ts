@@ -1,43 +1,178 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpHeaders,
+  HttpEventType,
+  HttpParams,
+  HttpContext,
+  HttpRequest,
+  HttpHandler,
+  HttpEvent,
+} from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { NgxSpinnerService } from 'ngx-spinner';
+
+import { Observable, Subject, map, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
+@Injectable()
 export class UsersService {
   http: any;
-  constructor(private myUsers: HttpClient) {}
+  // intercept(
+  //   req: HttpRequest<any>,
+  //   handler: HttpHandler
+  // ): Observable<HttpEvent<any>> {
+  //   console.log('Request URL: ' + req.url);
+  //   return handler.handle(req);
+  // }
+  constructor(
+    private myUsers: HttpClient,
+    private spinner: NgxSpinnerService
+  ) {}
   private DB_URL = 'https://iti-angular-project.onrender.com/api/v1';
-  private apiKey =
-    'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySWQiOiI2NWQzY2IzMzBjMjkxNTcyZWVmZmU3OTEiLCJSb2xlIjoiYWRtaW4iLCJpYXQiOjE3MDgzNzg5MzgsImV4cCI6MTcxNjE1NDkzOH0.2THZS0V9wGxCvMWO1pm-zPFm27SBEFDPcLYMAcnC55A';
-  private apiKeydelet =
-    'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySWQiOiI2NWQzYzQ1NTQ2NWNjNGIxYWIxYjdhNTciLCJSb2xlIjoiYWRtaW4iLCJpYXQiOjE3MDgzNzc2NjIsImV4cCI6MTcxNjE1MzY2Mn0.b-RHEJAVqSMG0TclBAUBIn-y-Em-QiMY017x3McEJqg';
+  // private userLogin = {
+  //   email: 'admin2@gmail.com',
+  //   password: '123456',
+  // };
+  private token = `Bearer ${localStorage.getItem('token')}`;
 
   getStats() {
     let headers = new HttpHeaders();
-    headers = headers.set('Authorization', this.apiKey);
-    return this.myUsers.get(`${this.DB_URL}/admin/getusers`, {
-      headers: headers,
-    });
+    headers = headers.set('Authorization', this.token);
+    return this.myUsers
+      .get(`${this.DB_URL}/admin/getusers`, {
+        headers: headers,
+        observe: 'events',
+      })
+      .pipe(
+        tap((e) => {
+          if (e.type === HttpEventType.Sent) {
+            // Handle sent event
+            this.spinner.show();
+            console.log('sending ......');
+          }
+          if (e.type === HttpEventType.Response) {
+            this.spinner.hide();
+
+            console.log('response ......');
+            console.log(e);
+            // Handle response event
+          }
+        })
+      );
   }
+  tesst(): Observable<any> {
+    return this.myUsers
+      .get(`${this.DB_URL}/categories`, {
+        observe: 'events',
+      })
+      .pipe(
+        tap((e) => {
+          if (e.type === HttpEventType.Sent) {
+            // Handle sent event
+            this.spinner.show();
+            console.log('sending ......');
+          }
+          if (e.type === HttpEventType.Response) {
+            this.spinner.hide();
+
+            console.log('response ......');
+            console.log(e);
+            // Handle response event
+          }
+        })
+      );
+  }
+  // showSpinner() {
+  //   this.spinner.show();
+  //   setTimeout(() => {
+  //     this.spinner.hide();
+  //   }, 3000);
+  // }
+
   deleteUser(id: any) {
     let headers = new HttpHeaders();
-    headers = headers.set('Authorization', this.apiKeydelet);
-    return this.myUsers.get(`${this.DB_URL}/admin/getusers/${id}`, {
-      headers: headers,
-    });
+    headers = headers.set('Authorization', this.token);
+    return this.myUsers
+      .delete(`${this.DB_URL}/admin/getusers/${id}`, {
+        observe: 'events',
+        headers: headers,
+      })
+      .pipe(
+        tap((e) => {
+          if (e.type == HttpEventType.Sent) {
+            this.spinner.show();
+            console.log('sendingggggg...');
+          }
+          if (e.type === HttpEventType.Response) {
+            this.spinner.hide();
+            console.log(e);
+            // this.getStats().subscribe();
+            location.reload();
+          }
+        })
+      );
   }
 
+  deleteCategory(id: any) {
+    let headers = new HttpHeaders();
+    headers = headers.set('Authorization', this.token);
+    return this.myUsers
+      .delete(`${this.DB_URL}/categories/${id}`, {
+        observe: 'events',
+        headers: headers,
+      })
+      .pipe(
+        tap((e) => {
+          if (e.type == HttpEventType.Sent) {
+            this.spinner.show();
+            console.log('sendingggggg...');
+          }
+          if (e.type === HttpEventType.Response) {
+            this.spinner.hide();
+            console.log(e);
+            // this.getStats().subscribe();
+            location.reload();
+          }
+        })
+      );
+  }
+
+  setToken(token: string) {
+    localStorage.setItem('token', token);
+  }
   addNewStudent(student: any) {
     return this.myUsers.post(`${this.DB_URL}/users/signup`, student);
   }
   login(user: any) {
-    return this.myUsers.post(`${this.DB_URL}/users/login`, user);
+    console.log(user);
+
+    return this.myUsers
+      .post(`${this.DB_URL}/users/login`, user, {
+        observe: 'events',
+      })
+      .pipe(
+        tap((e) => {
+          if (e.type === HttpEventType.Sent) {
+            // Handle sent event
+            this.spinner.show();
+            console.log('sending ......');
+          }
+          if (e.type === HttpEventType.Response) {
+            this.spinner.hide();
+
+            console.log('response ......');
+            console.log(e);
+            // Handle response event
+          }
+        })
+      );
   }
 
   addNewCategory(category: any) {
     let headers = new HttpHeaders();
-    headers = headers.set('Authorization', this.apiKey);
+    headers = headers.set('Authorization', this.token);
     return this.myUsers.post(
       `${this.DB_URL}/categories`,
 
@@ -49,7 +184,9 @@ export class UsersService {
   }
 
   getCategories() {
-    return this.myUsers.get(`${this.DB_URL}/categories`);
+    return this.myUsers.get(`${this.DB_URL}/categories`, {
+      observe: 'events',
+    });
   }
   getBrands() {
     return this.myUsers.get(`${this.DB_URL}/brands`);
@@ -57,7 +194,7 @@ export class UsersService {
 
   addNewBrand(category: any) {
     let headers = new HttpHeaders();
-    headers = headers.set('Authorization', this.apiKey);
+    headers = headers.set('Authorization', this.token);
     return this.myUsers.post(
       `${this.DB_URL}/brands`,
 
