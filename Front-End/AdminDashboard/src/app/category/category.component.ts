@@ -28,7 +28,9 @@ export class CategoryComponent implements OnInit {
     // });
   }
   deleteCategory(id: any) {
-    this.UService.deleteCategory(id).subscribe();
+    if (confirm('are sure you want to delete category ')) {
+      this.UService.deleteCategory(id).subscribe();
+    }
   }
   consel() {
     console.log('aaaaa');
