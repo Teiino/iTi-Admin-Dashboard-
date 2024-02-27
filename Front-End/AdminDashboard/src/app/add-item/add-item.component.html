@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- <nav class="navbar navbar-expand-lg bg-body-tertiary mb-5"> -->
+    <!-- <div class="container-fluid">
+    <a class="navbar-brand" href="#">Navbar</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Features</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Pricing</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+        </li>
+      </ul>
+    </div>
+  </div> -->
+    <!-- </nav> -->
+    <div class="container">
+      <!-- <div class="items">
+       <button>User List</button>
+       <button>User List</button>
+       <button>User List</button>
+       <button>User List</button>
+       <button>User List</button>
+       <div class="space">
+
+       </div>
+    </div> -->
+      <form [formGroup]="regValidation" class="details">
+        <div class="title">
+          <h2>Add new item</h2>
+        </div>
+        <div class="form">
+          <label class="title-image">
+            <h5>Product Image</h5>
+
+            <div class="form-group">
+              <input
+                type="file"
+                class="form-control-file"
+                id="exampleFormControlFile1"
+                accept="image/*"
+              />
+            </div>
+
+            <h5>Cover Image</h5>
+
+            <div class="form-group">
+              <input
+                type="file"
+                class="form-control-file"
+                id="exampleFormControlFile1"
+                accept="image/*"
+                required
+              />
+            </div>
+          </label>
+          <input
+            type="text"
+            formControlName="title"
+            class="item-name"
+            required
+            placeholder=" Title"
+          />
+          @if (Title.errors?.["required"]&&Title.touched) {
+          <div>
+            <p class="text-danger">Required</p>
+          </div>
+          }
+          <input
+            type="text"
+            formControlName="description"
+            class="item-description"
+            required
+            placeholder="  Description"
+          />
+          @if (Description.errors?.["required"]&&Description.touched) {
+          <div>
+            <p class="text-danger">Required</p>
+          </div>
+          }
+          <input
+            type="number"
+            formControlName="quantity"
+            min="1"
+            class="price-before-discount"
+            required
+            placeholder=" Quantity"
+          />
+          @if (Quantity.errors?.["required"]&&Quantity.touched) {
+          <div>
+            <p class="text-danger">Required</p>
+          </div>
+          }
+          <input
+            type="number"
+            formControlName="price"
+            required
+            class="item-price"
+            placeholder=" Price "
+          />
+          @if (Price.errors?.["required"]&&Price.touched) {
+          <div>
+            <p class="text-danger">Required</p>
+          </div>
+          }
+          <!-- <div class="percentage_div"> -->
+          <!-- <h6>Discount</h6>
+            <input
+              type="text"
+              [(ngModel)]="dis"
+              formControlName="discount"
+              min="0"
+              class="discount"
+              id="hassan"
+            />
+            <span>%</span> -->
+          <!-- <button class="show" (click)="show()">Show final price</button>
+            <output formControlName="PriceAfterdiscount">{{
+              PriceAfterdiscount
+            }}</output>
+          </div> -->
+          <!-- <select formControlName="category" class="form-control" id="options">
+            <option>Men</option>
+            <option>Women</option>
+          </select> -->
+
+          <label for="option">Category</label>
+          <!-- <input type="text" formControlName="category" required class="rating" placeholder=" Category"> -->
+          <select
+            formControlName="category"
+            required
+            class="rating"
+            class="form-control"
+            id="options"
+          >
+            @for(categor of category ;track categor._id){
+            <option value="{{ categor._id }}">{{ categor.name }}</option>
+            }
+          </select>
+          @if (Category.errors?.["required"]&&Category.touched) {
+          <div>
+            <p class="text-danger">Required</p>
+          </div>
+          }
+          <!-- <input type="text" [(ngModel)]="subcategory" class="rating" placeholder="Subcategory"> -->
+          <!-- <input type="text" [(ngModel)]="brand" class="brand" placeholder=" Brand"> -->
+          <div class="colors"></div>
+
+          <button (click)="submit()" class="save">Save</button>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

@@ -11,9 +11,24 @@ import { ContentComponent } from './content/content.component';
 import { authGuard } from './services/auth.guard';
 import { CategoryComponent } from './category/category.component';
 import { AddCatogeryFormComponent } from './add-catogery-form/add-catogery-form.component';
+import { ForgetPasswordComponent } from './forget-password/forget-password.component';
+import { VerifyCodeComponent } from './verify-code/verify-code.component';
+import { NewPasswordComponent } from './new-password/new-password.component';
+import { ProductsListComponent } from './products-list/products-list.component';
+import { UserEditFormComponent } from './user-edit-form/user-edit-form.component';
+import { EditProductComponent } from './edit-product/edit-product.component';
+import { AddItemComponent } from './add-item/add-item.component';
 
 export const routes: Routes = [
   { path: '', component: SignInComponent },
+  // { path: 'test', component: UserEditFormComponent },
+
+  {
+    path: 'ForgetPassword',
+    component: ForgetPasswordComponent,
+  },
+  { path: 'VerifyCode', component: VerifyCodeComponent },
+  { path: 'newpassword', component: NewPasswordComponent },
   {
     path: 'loginadmin',
     canActivate: [authGuard],
@@ -24,6 +39,10 @@ export const routes: Routes = [
       { path: 'userslist', component: UsersListComponent },
       { path: 'content', component: ContentComponent },
       { path: 'Category', component: CategoryComponent },
+      { path: 'products', component: ProductsListComponent },
+      { path: 'editeUser', component: UserEditFormComponent },
+      { path: 'additem', component: AddItemComponent },
+      { path: 'test', component: EditProductComponent },
     ],
   },
   { path: 'allusers', component: UserComponent },

@@ -1,0 +1,27 @@
+<div class="card" style="width: 18rem;">
+    <form [formGroup]="regValidations">
+        <div class="form-group p-3">
+          <input formControlName="image" type="file" class="form-control-file" id="exampleFormControlFile1"  accept="image/*">
+          @if(titleValid.errors?.['required']&& titleValid.touched){
+            <div>
+                <p class="text-danger">Required</p>
+            </div>
+          }
+        </div>
+  <div class="card-body">
+    <input formControlName="title" type="text" class="form-control" placeholder="Product Title">
+     @if(titleValid.errors?.['required']&& titleValid.touched){
+            <div>
+                <p class="text-danger">Required</p>
+            </div>
+          }
+    <input formControlName="description" type="text" class="form-control mt-2" placeholder="Product Description">
+     @if(descriptionValid.errors?.['required']&& descriptionValid.touched){
+            <div>
+                <p class="text-danger">Required</p>
+            </div>
+          }
+    <a href="#" (click)="submit()" class="btn btn-primary mt-3 ">Submit</a>
+  </div>
+   </form>
+</div>

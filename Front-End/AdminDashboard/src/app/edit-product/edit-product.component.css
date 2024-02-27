@@ -1,0 +1,27 @@
+.card {
+    width: 18rem;
+    margin: auto;
+    margin-top: 50px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.form-group {
+    margin-bottom: 0;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.form-control {
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.btn-primary {
+    width: 100%;
+    border-radius: 5px;
+}

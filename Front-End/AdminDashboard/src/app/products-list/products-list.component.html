@@ -1,0 +1,26 @@
+<button class="btn btn-dark" routerLink="/loginadmin/additem">
+  add Product
+</button>
+<div class="Wrapper d-flex flex-wrap gap-3">
+  @for(product of products ;track product._id){
+  <div class="card" style="width: 18rem">
+    <img class="card-img-top" src="../../assets/4.jpg" />
+    <div class="card-body">
+      <h5 class="card-title">{{ product.title }}</h5>
+
+      <p class="card-text">
+        {{ product.description }}
+      </p>
+    </div>
+    <div class="card-body">
+      <button
+        (click)="deleteProduct(product._id, product.title)"
+        class="card-link"
+      >
+        Delete
+      </button>
+      <button class="card-link">Edit</button>
+    </div>
+  </div>
+  }
+</div>

@@ -77,12 +77,12 @@ export class SignInComponent implements OnInit {
 
     return this.regValidation.controls['password'];
   }
-  showSpinner() {
-    this.spinner.show();
-    setTimeout(() => {
-      this.spinner.hide();
-    }, 3000);
-  }
+  // showSpinner() {
+  //   this.spinner.show();
+  //   setTimeout(() => {
+  //     this.spinner.hide();
+  //   }, 3000);
+  // }
   // login(e: any, p: any) {
 
   //   console.log(e,p);

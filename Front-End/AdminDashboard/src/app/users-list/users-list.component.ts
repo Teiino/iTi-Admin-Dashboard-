@@ -1,11 +1,12 @@
 import { HttpClientModule } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from '../services/users.service';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-users-list',
   standalone: true,
-  imports: [HttpClientModule],
+  imports: [HttpClientModule, RouterModule],
   providers: [UsersService],
   templateUrl: './users-list.component.html',
   styleUrl: './users-list.component.css',

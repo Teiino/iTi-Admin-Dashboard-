@@ -62,6 +62,15 @@ export class UsersService {
         })
       );
   }
+  forgerPassword(email: any) {
+    return this.myUsers.post(`${this.DB_URL}/users/fPasswored`, email);
+  }
+  passwordVerify(code: any) {
+    return this.myUsers.post(`${this.DB_URL}/users/fPassworedVerify`, code);
+  }
+  newPassword(password: any) {
+    return this.myUsers.post(`${this.DB_URL}/users/restPasswordForF`, password);
+  }
   tesst(): Observable<any> {
     return this.myUsers
       .get(`${this.DB_URL}/categories`, {
@@ -160,10 +169,9 @@ export class UsersService {
             console.log('sending ......');
           }
           if (e.type === HttpEventType.Response) {
-            this.spinner.hide();
-
             console.log('response ......');
             console.log(e);
+            this.spinner.hide();
             // Handle response event
           }
         })
@@ -203,5 +211,51 @@ export class UsersService {
         headers: headers,
       }
     );
+  }
+
+  addNewProduct(product: any) {
+    let headers = new HttpHeaders();
+    headers = headers.set('Authorization', this.token);
+    return this.myUsers.post(
+      `${this.DB_URL}/products`,
+
+      product,
+      {
+        headers: headers,
+      }
+    );
+  }
+  deleteProduct(id: any) {
+    let headers = new HttpHeaders();
+    headers = headers.set('Authorization', this.token);
+    return this.myUsers.delete(
+      `${this.DB_URL}/products/${id}`,
+
+      {
+        headers: headers,
+      }
+    );
+  }
+  getAllProduct() {
+    let headers = new HttpHeaders();
+    return this.myUsers
+      .get(`${this.DB_URL}/products`, {
+        observe: 'events',
+      })
+      .pipe(
+        tap((e) => {
+          if (e.type === HttpEventType.Sent) {
+            // Handle sent event
+            this.spinner.show();
+            console.log('sending ......');
+          }
+          if (e.type === HttpEventType.Response) {
+            console.log('response ......');
+            console.log(e);
+            this.spinner.hide();
+            // Handle response event
+          }
+        })
+      );
   }
 }

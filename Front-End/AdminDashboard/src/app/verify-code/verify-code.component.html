@@ -1,0 +1,26 @@
+<div class="card">
+  <div class="card-header">Verify Code</div>
+  <div class="card-body">
+    <form>
+      <div class="form-group">
+        <label for="code">Verification Code</label>
+        <input
+          #code
+          type="text"
+          class="form-control"
+          id="code"
+          placeholder="Enter verification code"
+        />
+      </div>
+      <button
+        routerLink="/newpassword"
+        type="submit"
+        li
+        class="btn btn-verify-code"
+        (click)="sendVrify(code.value)"
+      >
+        Verify
+      </button>
+    </form>
+  </div>
+</div>
