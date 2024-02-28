@@ -40,13 +40,13 @@
           />
         </svg>
         <div class="username-user">
-          <span>User Name</span>
+          <span>User Name:{{ username }}</span>
           <span>Role</span>
         </div>
       </div>
       <div class="rightSide logout">
         <svg
-          (click)="logout()"
+          (click)="userName()"
           xmlns="http://www.w3.org/2000/svg"
           width="18"
           hight="18"

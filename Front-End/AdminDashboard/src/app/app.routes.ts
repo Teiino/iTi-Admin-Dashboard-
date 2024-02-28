@@ -18,6 +18,7 @@ import { ProductsListComponent } from './products-list/products-list.component';
 import { UserEditFormComponent } from './user-edit-form/user-edit-form.component';
 import { EditProductComponent } from './edit-product/edit-product.component';
 import { AddItemComponent } from './add-item/add-item.component';
+import { UserHomepageComponent } from './user-homepage/user-homepage.component';
 
 export const routes: Routes = [
   { path: '', component: SignInComponent },
@@ -30,7 +31,7 @@ export const routes: Routes = [
   { path: 'VerifyCode', component: VerifyCodeComponent },
   { path: 'newpassword', component: NewPasswordComponent },
   {
-    path: 'loginadmin',
+    path: 'loginadmin/:username',
     canActivate: [authGuard],
     component: AdminComponent,
     children: [
@@ -49,7 +50,11 @@ export const routes: Routes = [
   { path: 'regester', component: RegisterComponent },
   // { path: 'loginadmin', component: AdminComponent },
 
-  { path: 'loginuser', component: SellerComponent },
+  {
+    path: 'loginuser/:username',
+    canActivate: [authGuard],
+    component: UserHomepageComponent,
+  },
 ];
 
 // export const routes: Routes = [

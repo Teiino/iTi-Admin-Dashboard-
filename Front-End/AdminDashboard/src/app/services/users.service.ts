@@ -8,7 +8,9 @@ import {
   HttpHandler,
   HttpEvent,
 } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit, effect, signal } from '@angular/core';
+import { signalSetFn } from '@angular/core/primitives/signals';
+import { ChildActivationEnd } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 
 import { Observable, Subject, map, tap } from 'rxjs';
@@ -17,8 +19,11 @@ import { Observable, Subject, map, tap } from 'rxjs';
   providedIn: 'root',
 })
 @Injectable()
-export class UsersService {
+export class UsersService implements OnInit {
   http: any;
+  ngOnInit(): void {
+    // this.sentData();
+  }
   // intercept(
   //   req: HttpRequest<any>,
   //   handler: HttpHandler
@@ -30,6 +35,48 @@ export class UsersService {
     private myUsers: HttpClient,
     private spinner: NgxSpinnerService
   ) {}
+  //  private eventDataSubject = new Subject<any>();
+  // eventData$ = this.eventDataSubject.asObservable();
+  dataus: any = '';
+  // private userSignal = signal('ana init signal');
+  getEventData(data: any) {
+    // console.log(data);
+    // this.dataus = data;
+    // this.userSignal.update(() => data);
+    // this.userSignal.set('set data new');
+    // console.log('get', this.userSignal());
+    // this.dataus = this.userSignal();
+    // console.log(this.dataus);
+    // this.eventDataSubject.next(data);
+    // return this.dataus;
+    this.dataus = data;
+    // console.log(this.dataus);
+    // this.sentData(this.dataus);
+    const aa = data;
+    console.log(aa);
+    return function sentzeko() {
+      console.log(aa);
+      return aa;
+    };
+  }
+  // getuser(){
+
+  //   return function sentzeko(){
+
+  //   }
+  // }
+  // sentdata = 'sentData runnnnn';
+  // userEffect = effect(() => console.log(this.userSignal()));
+  sentData() {
+    // console.log(object);
+    // const onlyRead = dd;
+    // console.log(this.dataus);
+    // console.log('sent', this.dataus);
+    // console.log(this.userSignal());
+    // return { message: this.dataus };
+    // console.log(onlyRead);
+    // return onlyRead;
+  }
   private DB_URL = 'https://iti-angular-project.onrender.com/api/v1';
   // private userLogin = {
   //   email: 'admin2@gmail.com',

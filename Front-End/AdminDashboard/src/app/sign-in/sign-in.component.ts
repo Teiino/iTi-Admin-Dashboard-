@@ -1,11 +1,19 @@
 import { CommonModule, registerLocaleData } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  OnInit,
+  Output,
+  WritableSignal,
+  signal,
+} from '@angular/core';
 import {
   FormControl,
   FormGroup,
   FormsModule,
   NgModel,
+  NgModelGroup,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
@@ -34,6 +42,16 @@ export class SignInComponent implements OnInit {
     private router: Router,
     private spinner: NgxSpinnerService
   ) {}
+  counter = signal('');
+  userName = 'ahmed ayhia updateeeee ';
+  // @Output() myEvent = new EventEmitter();
+  // fire() {
+  //   this.counter.update(() => 'ahmed data from login');
+  // }
+  emitEvent() {
+    this.UService.getEventData(this.userName);
+    // this.UService.sendEventData(this.ahmed);
+  }
   ngOnInit() {
     /** spinner starts on init */
     // this.spinner.show();
@@ -116,15 +134,20 @@ export class SignInComponent implements OnInit {
           // const data = data.token;
           console.log(data);
           this.UService.setToken(data.body.token);
-        },
-        complete: () => {
-          // alert('login sucsess');
-          if (true) {
-            this.router.navigate(['loginadmin/dashboard'], {
+          if (data.body.role === 'admin') {
+            this.router.navigate(
+              [`loginadmin/${data.body.userName}/dashboard`],
+              {
+                relativeTo: this.route,
+              }
+            );
+
+            this.router.navigate(['username'], { state: { name: 'ahmed' } });
+          } else {
+            this.router.navigate([`loginuser/${data.body.userName}`], {
               relativeTo: this.route,
             });
-          } else {
-            this.router.navigate(['loginuser'], { relativeTo: this.route });
+            // this.myEvent.emit(data.body.role);
           }
         },
       });
@@ -154,6 +177,9 @@ export class SignInComponent implements OnInit {
   // }
 }
 
+function NavigationExtras(counter: WritableSignal<string>) {
+  return counter;
+}
 // }
 //  login() {
 //   const emailValid = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.email);

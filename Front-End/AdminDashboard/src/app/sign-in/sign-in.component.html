@@ -7,6 +7,9 @@
     <!-- <link rel="stylesheet" href="fontawesome-free-6.5.1-web\"> -->
   </head>
   <body>
+    <!-- <button class="btn btn-dark" (click)="fire()">fire</button>
+    <div>{{ counter() }}</div> -->
+
     <!-- @if(true){
     {{ showSpinner() }}
     } -->
@@ -70,7 +73,9 @@
         </form>
         <!--
                      } -->
-        <button type="submit" (click)="login()">Login</button>
+        <button type="submit" (click)="emitEvent()" (click)="login()">
+          Login
+        </button>
         <button class="forget" routerLink="/ForgetPassword">
           Forget Password?
         </button>
