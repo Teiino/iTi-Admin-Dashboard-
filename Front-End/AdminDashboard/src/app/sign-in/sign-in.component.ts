@@ -42,16 +42,17 @@ export class SignInComponent implements OnInit {
     private router: Router,
     private spinner: NgxSpinnerService
   ) {}
-  counter = signal('');
-  userName = 'ahmed ayhia updateeeee ';
+  // counter = signal('');
+  // userName = 'ahmed ayhia updateeeee ';
   // @Output() myEvent = new EventEmitter();
   // fire() {
   //   this.counter.update(() => 'ahmed data from login');
   // }
-  emitEvent() {
-    this.UService.getEventData(this.userName);
-    // this.UService.sendEventData(this.ahmed);
-  }
+  // emitEvent() {
+  //   const dataToSend = { message: 'Hello from child!' };
+  //   this.UService.getEventData(dataToSend);
+  //   // this.UService.sendEventData(this.ahmed);
+  // }
   ngOnInit() {
     /** spinner starts on init */
     // this.spinner.show();
@@ -136,13 +137,11 @@ export class SignInComponent implements OnInit {
           this.UService.setToken(data.body.token);
           if (data.body.role === 'admin') {
             this.router.navigate(
-              [`loginadmin/${data.body.userName}/dashboard`],
+              [`loginadmin/${data.body.userName}/${data.body.role}/dashboard`],
               {
                 relativeTo: this.route,
               }
             );
-
-            this.router.navigate(['username'], { state: { name: 'ahmed' } });
           } else {
             this.router.navigate([`loginuser/${data.body.userName}`], {
               relativeTo: this.route,

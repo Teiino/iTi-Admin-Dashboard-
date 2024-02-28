@@ -1,5 +1,5 @@
 import { HttpClientModule } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { UsersService } from '../services/users.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -20,7 +20,7 @@ export class NavbarComponent implements OnInit {
   // userName = this.router.navigate(['loginadmin', username]);
 
   // userNamenav = this.router.getCurrentNavigation();
-  username: any;
+
   ngOnInit(): void {
     this.userName();
     // console.log(this.userName);
@@ -29,8 +29,12 @@ export class NavbarComponent implements OnInit {
     // });
     // console.log('userNamenav', this.username);
   }
+
+  @Input() usernamenav: any;
+  @Input() roleNav: any;
+
   userName() {
-    console.log(this.UService.getEventData('paaa')());
+    console.log(this.UService.sentData());
     // console.log(this.username);
   }
   logout() {

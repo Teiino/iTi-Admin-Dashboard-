@@ -35,11 +35,13 @@ export class UsersService implements OnInit {
     private myUsers: HttpClient,
     private spinner: NgxSpinnerService
   ) {}
-  //  private eventDataSubject = new Subject<any>();
-  // eventData$ = this.eventDataSubject.asObservable();
+  private eventDataSubject = new Subject<any>();
+  eventData$ = this.eventDataSubject.asObservable();
   dataus: any = '';
   // private userSignal = signal('ana init signal');
   getEventData(data: any) {
+    console.log(data);
+    this.eventDataSubject.next(data);
     // console.log(data);
     // this.dataus = data;
     // this.userSignal.update(() => data);
@@ -49,15 +51,15 @@ export class UsersService implements OnInit {
     // console.log(this.dataus);
     // this.eventDataSubject.next(data);
     // return this.dataus;
-    this.dataus = data;
+    // this.dataus = data;
     // console.log(this.dataus);
     // this.sentData(this.dataus);
-    const aa = data;
-    console.log(aa);
-    return function sentzeko() {
-      console.log(aa);
-      return aa;
-    };
+    // const aa = data;
+    // console.log(aa);
+    // return function sentzeko() {
+    // console.log(aa);
+    // return aa;
+    // };
   }
   // getuser(){
 
@@ -166,6 +168,53 @@ export class UsersService implements OnInit {
             console.log(e);
             // this.getStats().subscribe();
             location.reload();
+          }
+        })
+      );
+  }
+  editeUser(id: any) {
+    let headers = new HttpHeaders();
+    headers = headers.set('Authorization', this.token);
+    return this.myUsers
+      .get(`${this.DB_URL}/admin/getusers/${id}`, {
+        observe: 'events',
+        headers: headers,
+      })
+      .pipe(
+        tap((e) => {
+          if (e.type == HttpEventType.Sent) {
+            this.spinner.show();
+            console.log('sendingggggg...');
+          }
+          if (e.type === HttpEventType.Response) {
+            this.spinner.hide();
+            console.log(e);
+            // this.getStats().subscribe();
+            // location.reload();
+          }
+        })
+      );
+  }
+
+  updateUser(id: any, obj: any) {
+    let headers = new HttpHeaders();
+    headers = headers.set('Authorization', this.token);
+    return this.myUsers
+      .patch(`${this.DB_URL}/admin/getusers/${id}`, obj, {
+        observe: 'events',
+        headers: headers,
+      })
+      .pipe(
+        tap((e) => {
+          if (e.type == HttpEventType.Sent) {
+            this.spinner.show();
+            console.log('sendingggggg...');
+          }
+          if (e.type === HttpEventType.Response) {
+            this.spinner.hide();
+            console.log(e);
+            // this.getStats().subscribe();
+            // location.reload();
           }
         })
       );

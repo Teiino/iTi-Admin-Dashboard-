@@ -1,7 +1,7 @@
 import { UsersService } from './../services/users.service';
 import { HttpClientModule } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-products-list',
@@ -12,7 +12,15 @@ import { RouterModule } from '@angular/router';
   styleUrl: './products-list.component.css',
 })
 export class ProductsListComponent implements OnInit {
-  constructor(private UService: UsersService) {}
+  constructor(
+    private UService: UsersService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
+  togle: any = true;
+  togleUser() {
+    this.togle = false;
+  }
   products: any;
   ngOnInit(): void {
     this.UService.getAllProduct().subscribe({
@@ -29,4 +37,10 @@ export class ProductsListComponent implements OnInit {
       });
     }
   }
+  // cons() {
+  //   console.log('add');
+  //   this.router.navigate(['additem'], {
+  //     relativeTo: this.route,
+  //   });
+  // }
 }

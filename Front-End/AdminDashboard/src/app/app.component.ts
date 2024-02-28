@@ -27,6 +27,7 @@ import { AddBrandComponent } from './add-brand/add-brand.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { HttpClientModule } from '@angular/common/http';
 import { UsersService } from './services/users.service';
+// import { ChartLineDemo } from './charts/chart-line-demo';
 
 @Component({
   selector: 'app-root',
@@ -48,6 +49,7 @@ import { UsersService } from './services/users.service';
     NavbarComponent,
     NgxSpinnerModule,
     HttpClientModule,
+    // ChartLineDemo,
   ],
   providers: [UsersService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -59,9 +61,7 @@ export class AppComponent implements OnInit {
     private UService: UsersService,
     private route: ActivatedRoute,
     private router: Router
-  ) {
-    // this.UService.eventData$.subscribe((data) => this.getUser(data));
-  }
+  ) {}
 
   // userName: any = this.router.getCurrentNavigation();
   ngOnInit(): void {

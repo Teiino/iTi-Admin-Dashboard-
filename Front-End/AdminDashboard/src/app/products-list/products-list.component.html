@@ -1,4 +1,8 @@
-<button class="btn btn-dark" routerLink="/loginadmin/additem">
+@if(togle){<button
+  class="btn btn-dark"
+  (click)="togleUser()"
+  routerLink="additem"
+>
   add Product
 </button>
 <div class="Wrapper d-flex flex-wrap gap-3">
@@ -24,3 +28,4 @@
   </div>
   }
 </div>
+} @if(!togle){ <router-outlet></router-outlet>}

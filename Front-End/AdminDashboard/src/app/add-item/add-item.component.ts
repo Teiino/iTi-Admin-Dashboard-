@@ -114,7 +114,7 @@ export class AddItemComponent implements OnInit {
       };
       console.log(obj);
       this.UService.addNewProduct(obj).subscribe({
-        complete: () => console.log('add successfully'),
+        complete: () => location.reload(),
       });
       // console.log(this.obj.Description.description);
     } else alert('Failed');

@@ -31,18 +31,25 @@ export const routes: Routes = [
   { path: 'VerifyCode', component: VerifyCodeComponent },
   { path: 'newpassword', component: NewPasswordComponent },
   {
-    path: 'loginadmin/:username',
+    path: 'loginadmin/:username/:role',
     canActivate: [authGuard],
     component: AdminComponent,
     children: [
       { path: 'dashboard', component: AdmindashboardComponent },
       { path: 'addCategory', component: AddCatogeryFormComponent },
-      { path: 'userslist', component: UsersListComponent },
+      {
+        path: 'userslist',
+        component: UsersListComponent,
+        children: [{ path: 'editeUser/:id', component: UserEditFormComponent }],
+      },
       { path: 'content', component: ContentComponent },
       { path: 'Category', component: CategoryComponent },
-      { path: 'products', component: ProductsListComponent },
-      { path: 'editeUser', component: UserEditFormComponent },
-      { path: 'additem', component: AddItemComponent },
+      {
+        path: 'products',
+        component: ProductsListComponent,
+        children: [{ path: 'additem', component: AddItemComponent }],
+      },
+
       { path: 'test', component: EditProductComponent },
     ],
   },
