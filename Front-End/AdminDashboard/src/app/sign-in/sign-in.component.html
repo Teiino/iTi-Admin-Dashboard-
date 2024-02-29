@@ -20,6 +20,7 @@
       <div class="log">
         <div class="photo">
           <i class="icon fa-regular fa-user"></i>
+          <h1>Login</h1>
           <!-- [class]="nameFeedback?'invalid':'valid'" -->
         </div>
         <form [formGroup]="regValidation" class="inputs">
@@ -34,12 +35,10 @@
                 type="email"
               />
             </div>
-            @if(this.regValidation.controls.email.valid== true) {
-            <p class="green" style="color: green">success</p>
-            }@if(this.regValidation.controls.email.valid== false &&
-            this.regValidation.controls.email.value){
-            <p class="green" style="color: rgb(214, 21, 21)">Invalid</p>
-            }
+            <div class="input-status">
+              <span *ngIf="regValidation.controls.email.valid" class="green">✅</span>
+              <span *ngIf="!regValidation.controls.email.valid && regValidation.controls.email.value" class="red">❌</span>
+            </div>
             <!-- @if(regValidation.controls["email"].valid){
                       <div>
                     <span style="color: green;" class="emailSpan" >success</span>
@@ -58,21 +57,14 @@
               placeholder="Password"
               type="password"
             />
-            <!-- @if(!passwordvalid){
-                      <div>
-                        <p style="color: red; ">password required</p>
-                        </div>
-                      } -->
-            @if(this.regValidation.controls.password.valid== true) {
-            <p class="green" style="color: green">success</p>
-            }@else if(this.regValidation.controls.password.valid== false &&
-            this.regValidation.controls.password.value){
-            <p class="green" style="color: rgb(214, 21, 21)">Invalid</p>
-            }
+            <div class="input-status">
+              <span *ngIf="regValidation.controls.password.valid" class="green">✅</span>
+              <span *ngIf="!regValidation.controls.password.valid && regValidation.controls.password.value" class="red">❌</span>
+            </div>
           </div>
+          
         </form>
-        <!--
-                     } -->
+
         <button type="submit" (click)="login()">Login</button>
         <button class="forget" routerLink="/ForgetPassword">
           Forget Password?

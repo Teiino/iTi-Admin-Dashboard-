@@ -14,15 +14,25 @@
 }
 
 .wid1 {
-  background-color: #fff;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
+  color: #f0f0f0; /* Adjusted text color */
+  border-radius: 20px;
   padding: 20px;
   text-align: center;
-  max-width: 200px;
+  max-width: 300px; /* Adjusted max-width for better readability */
   margin: auto;
   font-family: Arial, sans-serif;
+  background-color: rgba(255, 255, 255, 0.05); /* Adjusted background color */
+  backdrop-filter: blur(10px); 
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Adjusted box shadow for depth */
+  transition: background-color 0.3s, box-shadow 0.3s; /* Added transition for smoother hover effect */
 }
+
+.wid1:hover {
+  background-color: rgba(255, 255, 255, 0.1); /* Lighten background color on hover */
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3); /* Increase box shadow on hover for elevation */
+  transform: translateY(-4px); /* Lift the card slightly on hover */
+}
+
 
 .wid1 p {
   margin-bottom: 10px;
@@ -31,10 +41,14 @@
 .wid1 p:last-child {
   margin-bottom: 0;
   font-size: 0.9em;
-  color: #888;
+  color: #ffffff;
 }
 
 .wid1 p span {
   color: #007bff;
   font-weight: bold;
+}
+
+svg{
+  fill: #ffffff;
 }

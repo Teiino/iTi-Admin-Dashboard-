@@ -9,17 +9,20 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  /* border: 1px solid red; */
   height: 70px;
 }
+
 nav {
   display: flex;
-  background-color: white;
   justify-content: space-between;
   width: 75rem;
   height: 50px;
   border-radius: 15px;
-  background-color: rgb(224, 226, 228);
+  background-color: #343a40;
+  color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px); 
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
 }
 
 .search {
@@ -27,21 +30,25 @@ nav {
   justify-content: center;
   align-items: center;
   margin-left: 80px;
+  background: transparent;
 }
 
 .searchIcon {
   margin-right: -24px;
   z-index: 1;
 }
+
 .searchBar {
   height: 30px;
   width: 20rem;
   border-radius: 10px;
-  border: rgb(247, 247, 247);
-  background-color: rgb(255, 255, 255);
+  background-color: rgba(255, 255, 255, 0.2); /* Transparent white background */
+  backdrop-filter: blur(8px); /* Apply blur effect */
+  border-radius: 10px; /* Rounded corners */
+  padding: 10px; /* Adjust padding as needed */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow */
   align-self: center;
   padding-left: 28px;
-  /* margin-left: 50px; */
 }
 
 .rightSide {
@@ -49,13 +56,13 @@ nav {
   gap: 15px;
   align-items: center;
   width: 200px;
-  /* border: 1px solid green; */
 }
 
 span {
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   font-weight: 100;
   font-size: small;
+  color: #ffffff;
 }
 
 .username-user {
@@ -63,4 +70,27 @@ span {
   justify-content: center;
   flex-direction: column;
   align-items: center;
+}
+
+.logout svg {
+  fill: #ffffff;
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.logout svg:hover {
+  fill: #a8a8a8;
+}
+
+
+.search svg{
+  fill: #ffffff; 
+  margin-left: 10px;
+}
+
+.rightSide svg{
+  fill: #ffffff; 
+  margin-left: 10px;
 }
