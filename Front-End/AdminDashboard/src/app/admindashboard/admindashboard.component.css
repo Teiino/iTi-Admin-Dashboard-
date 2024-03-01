@@ -14,23 +14,23 @@
 }
 
 .wid1 {
-  color: #f0f0f0; /* Adjusted text color */
+  color: #f0f0f0;
   border-radius: 20px;
   padding: 20px;
   text-align: center;
-  max-width: 300px; /* Adjusted max-width for better readability */
+  max-width: 300px;
   margin: auto;
   font-family: Arial, sans-serif;
-  background-color: rgba(255, 255, 255, 0.05); /* Adjusted background color */
+  background-color: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(10px); 
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Adjusted box shadow for depth */
-  transition: background-color 0.3s, box-shadow 0.3s; /* Added transition for smoother hover effect */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s, box-shadow 0.3s;
 }
 
 .wid1:hover {
-  background-color: rgba(255, 255, 255, 0.1); /* Lighten background color on hover */
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3); /* Increase box shadow on hover for elevation */
-  transform: translateY(-4px); /* Lift the card slightly on hover */
+  background-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3); 
+  transform: translateY(-4px);
 }
 
 

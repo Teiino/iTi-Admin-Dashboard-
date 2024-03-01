@@ -1,6 +1,16 @@
 .edit-wrapper{
-    border: 1px solid rgb(219, 219, 219);
+    color: white;
     padding: 25px;
     width: 25rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px); 
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
 }
 
+input, input:focus{
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px); 
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    color: white;
+    border: none;
+}

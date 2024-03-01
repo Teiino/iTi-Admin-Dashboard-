@@ -1,5 +1,5 @@
 <div class="wrapper">
-<div class="home p-5 d-flex flex-column align-items-center">
+<div class="home d-flex flex-column align-items-center">
   <div><h2>Register</h2></div>
   <div>
     <form [formGroup]="registerValidation" action="">
@@ -17,7 +17,7 @@
           <label id="name" for="name">Name</label>
         </div>
         <!-- {{ console() }} -->
-        <div class="d-flex m-2 justify-content-end">
+        <div class="d-flex  justify-content-end">
           <!-- <div style="visibility: hidden"><span> valid name address</span></div> -->
 
           @if (nameValid.errors?.["required"]&&nameValid.touched) {
